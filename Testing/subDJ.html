@@ -82,7 +82,7 @@
 					<h2>System<small>.js</small></h2>
 					<legend data-target="#ping" data-toggle="collapse">ping <i class="fa fa-eye"></i></legend>
 					<div id="ping" class="collapse">
-						<button type="button" class="btn btn-primary">ping()</button>
+						<button type="button" onclick="_ping()" class="btn btn-primary">ping()</button>
 					</div>
 					<legend data-target="#getLicense" data-toggle="collapse">getLicense <i class="fa fa-eye"></i></legend>
 					<div id="getLicense" class="collapse">
@@ -1374,8 +1374,9 @@
 		 */
 
 		function _ping() {
-			var result = System.ping(auth);
-			log(result);
+			ping(auth, function() {
+				log(this);
+			});
 		}
 
 		function _getLicense() {
