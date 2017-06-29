@@ -1,118 +1,123 @@
 #console {
-	background-color: #000000;
-	border-color: #DFDCEB;
-	border-width: 2px;
-	color: #D9D9D9;
-	font-family: ubuntu-mono, monospace;
-	height: 500px;
-	overflow: auto;
+    background-color: #000000;
+    border-color: #DFDCEB;
+    border-width: 2px;
+    color: #D9D9D9;
+    font-family: ubuntu-mono, monospace;
+    height: 500px;
+    overflow: auto;
 }
 
 #console p {
-	font-size: 125%;
-	font-weight: 500;
+    font-size: 125%;
+    font-weight: 500;
 }
 
 #login {
-	height: 500px;
+    height: 500px;
 }
 
 .btn {
-	border-color: #212A50;
-	color: #FFFFFF;
-	font-family: droid-sans-mono, monospace;
-	font-weight: 900;
-	margin-top: 1em;
-	width: 100%;
+    border-color: #212A50;
+    color: #FFFFFF;
+    font-family: droid-sans-mono, monospace;
+    font-weight: 900;
+    margin-top: 1em;
+    width: 100%;
 }
 
 .btn:hover {
-	background-color: #DFDCEB;
-	color: #D75C37;
+    background-color: #DFDCEB;
+    color: #D75C37;
 }
 
 .footer {
-	background-color: #D75C37;
-	color: #4E565C;
-	margin-bottom: 20px;
-	padding-bottom: 5px;
-	padding-top: 5px;
-	text-align: center;
+    background-color: #D75C37;
+    color: #4E565C;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    text-align: center;
 }
 
 .footer a {
-	color: #4E565C;
-	font-size: 125%;
-	padding-left: 5px;
+    color: #4E565C;
+    font-size: 125%;
+    padding-left: 5px;
 }
 
 .jumbotron {
-	color: #DFDCEB;
-	text-align: center;
+    color: #DFDCEB;
+    text-align: center;
 }
 
 .jumbotron,
 .btn {
-	background-color: #D75C37
+    background-color: #D75C37
+}
+
+.jumbotron h1 {
+    font-size: 5em;
+    font-family: monoton;
 }
 
 .page-header {
-	background-color: #AA430D;
-	color: #DFDCEB;
-	text-align: center;
+    background-color: #AA430D;
+    color: #DFDCEB;
+    text-align: center;
 }
 
 .row .well {
-	height: 375px;
-	overflow: auto;
+    height: 375px;
+    overflow: auto;
 }
 
 .row h2 {
-	color: #D75C37;
-	font-size: 1.8em;
-	padding-bottom: 20px;
+    color: #D75C37;
+    font-size: 1.8em;
+    padding-bottom: 20px;
 }
 
 .row legend {
-	font-size: 1.3em;
+    font-size: 1.3em;
 }
 
 .well {
-	background-color: #EDF5F5;
-	border-color: #212A50;
-	border-width: thin;
+    background-color: #EDF5F5;
+    border-color: #212A50;
+    border-width: thin;
 }
 
 .well hr {
-	border-top: 1px solid #bababa;
-	margin-bottom: 0px;
-	margin-top: 10px;
+    border-top: 1px solid #bababa;
+    margin-bottom: 0px;
+    margin-top: 10px;
 }
 
 .well i {
-	color: #D75C37;
+    color: #D75C37;
 }
 
 .well legend {
-	margin-bottom: 10px;
-	margin-top: 5px;
+    margin-bottom: 10px;
+    margin-top: 5px;
 }
 
 ::-webkit-scrollbar {
-	background-color: #F5F5F5;
-	width: 8px;
+    background-color: #F5F5F5;
+    width: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-	background-color: #212A50;
+    background-color: #212A50;
 }
 
 ::-webkit-scrollbar-track {
-	background-color: #D75C37;
-	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #D75C37;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
 body {
-	background-color: #4E565C;
-	font-family: doppio-one, serif;
+    background-color: #4E565C;
+    font-family: doppio-one, serif;
 }

@@ -809,7 +809,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="http://use.edgefonts.net/doppio-one:n4:all;droid-sans-mono:n4:all;ubuntu-mono:n7,i7,n4,i4:all.js"></script>
+    <script src="http://use.edgefonts.net/doppio-one:n4:all;droid-sans-mono:n4:all;monoton:n4:all;montserrat:n4:all;ubuntu-mono:n7,i7,n4,i4:all.js"></script>
     <script src="js/md5.js"></script>
     <script src="js/Album.js"></script>
     <script src="js/Authenticate.js"></script>
@@ -965,7 +965,7 @@
         function _getMusicFolders() {
             getMusicFolders(auth, function() {
                 log(this);
-            })
+            });
         }
 
         function _getIndexes() {
@@ -981,54 +981,54 @@
             var id = getForm("getMusicDirectory_id");
             getMusicDirectory(auth, id, function() {
                 log(this);
-            })
+            });
         }
 
         function _getGenres() {
             getGenres(auth, function() {
                 log(this);
-            })
+            });
         }
 
         function _getArtists() {
             var musicFolderId = getForm("getArtists_musicFolderId");
             getArtists(auth, musicFolderId, function() {
                 log(this);
-            })
+            });
         }
 
         function _getArtist() {
             var id = getForm("getArtist_id");
             getArtist(auth, id, function() {
                 log(this);
-            })
+            });
         }
 
         function _getAlbum() {
             var id = getForm("getAlbum_id");
             getAlbum(auth, id, function() {
                 log(this);
-            })
+            });
         }
 
         function _getSong() {
             var id = getForm("getSong_id");
             getSong(auth, id, function() {
                 log(this);
-            })
+            });
         }
 
         function _getVideos() {
             getVideos(auth, function() {
                 log(this);
-            })
+            });
         }
 
         function _getVideoInfo() {
             var id = getForm("getVideoInfo_id");
             getVideoInfo(auth, id, function() {
                 log(this);
-            })
+            });
         }
 
         function _getArtistInfo() {
@@ -1037,7 +1037,7 @@
             var includeNotPresent = getForm("getArtistInfo_includeNotPresent");
             getArtistInfo(auth, id, count, includeNotPresent, function() {
                 log(this);
-            })
+            });
         }
 
         function _getArtistInfo2() {
@@ -1046,21 +1046,21 @@
             var includeNotPresent = getForm("getArtistInfo2_includeNotPresent");
             getArtistInfo2(auth, id, count, includeNotPresent, function() {
                 log(this);
-            })
+            });
         }
 
         function _getAlbumInfo() {
             var id = getForm("getAlbumInfo_id");
             getAlbumInfo(auth, id, function() {
                 log(this);
-            })
+            });
         }
 
         function _getAlbumInfo2() {
             var id = getForm("getAlbumInfo2_id");
             getAlbumInfo2(auth, id, function() {
                 log(this);
-            })
+            });
         }
 
         function _getSimilarSongs() {
@@ -1068,7 +1068,7 @@
             var count = getForm("getSimilarSongs_count");
             getSimilarSongs(auth, id, count, function() {
                 log(this);
-            })
+            });
         }
 
         function _getSimilarSongs2() {
@@ -1076,7 +1076,7 @@
             var count = getForm("getSimilarSongs2_count");
             getSimilarSongs2(auth, id, count, function() {
                 log(this);
-            })
+            });
         }
 
         function _getTopSongs() {
@@ -1084,7 +1084,7 @@
             var count = getForm("getTopSongs_count");
             getTopSongs(auth, artist, count, function() {
                 log(this);
-            })
+            });
         }
 
         /*
@@ -1401,7 +1401,7 @@
         function _getLicense() {
             getLicense(auth, function() {
                 log(this);
-            })
+            });
         }
 
         /*
