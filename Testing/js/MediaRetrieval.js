@@ -1,8 +1,8 @@
 /* jshint -W138 */
 /* TODO [x] Complete JSDocs */
-/* TODO [] Implement Functions */
+/* TODO [x] Implement Functions */
+/* FIXME [] Return proper streams instead of xml response. */
 
-/* FUTURE PICK UP HERE */
 /**
  * Streams a given media file.
  * @param   {object}  auth                  Authenticate Object.
@@ -15,9 +15,28 @@
  * @param   {boolean} converted             = false             (Since 1.14.0) Only applicable to video streaming. Subsonic can optimize videos for streaming by converting them to MP4. If a conversion exists for the video in question, then setting this parameter to "true" will cause the converted video to be returned instead of the original.
  * @param {function} callback  Returns binary data on success, or an XML document on error (in which case the HTTP content type will start with "text/xml").
  */
-function stream(auth, id, maxBitRate, format, timeOffset, size, estimateContentLength = false, converted = false) {
-	var result;
-	return result;
+function stream(auth, id, maxBitRate, format, timeOffset, size, estimateContentLength = false, converted = false, callback) {
+	var parameters = "&id=" + id;
+	if (maxBitRate !== "") {
+		parameters += "&maxBitRate=" + maxBitRate;
+	}
+	if (format !== "") {
+		parameters += "&format=" + format;
+	}
+	if (timeOffset !== "") {
+		parameters += "&timeOffset=" + timeOffset;
+	}
+	if (size !== "") {
+		parameters += "&size=" + size;
+	}
+	if (estimateContentLength !== "") {
+		parameters += "&estimateContentLength=" + estimateContentLength;
+	}
+	if (converted !== "") {
+		parameters += "&converted=" + converted;
+	}
+	parameters += "&";
+	getResponseNode(auth, callback, "stream", parameters);
 }
 
 /**
@@ -26,9 +45,9 @@ function stream(auth, id, maxBitRate, format, timeOffset, size, estimateContentL
  * @param   {string} id   A string which uniquely identifies the file to download. Obtained by calls to getMusicDirectory.
  * @param {function} callback Returns binary data on success, or an XML document on error (in which case the HTTP content type will start with "text/xml").
  */
-function download(auth, id) {
-	var result;
-	return result;
+function download(auth, id, callback) {
+	var parameters = "&id=" + id + "&";
+	getResponseNode(auth, callback, "download", parameters);
 }
 
 /**
@@ -39,9 +58,16 @@ function download(auth, id) {
  * @param   {string} audioTrack The ID of the audio track to use. See getVideoInfo for how to get the list of available audio tracks for a video.
  * @param {function} callback Returns an M3U8 playlist on success (content type "application/vnd.apple.mpegurl"), or an XML document on error (in which case the HTTP content type will start with "text/xml").
  */
-function hls(auth, id, bitRate, audioTrack) {
-	var result;
-	return result;
+function hls(auth, id, bitRate, audioTrack, callback) {
+	var parameters = "&id=" + id;
+	if (bitRate !== "") {
+		parameters += "&bitRate=" + bitRate;
+	}
+	if (audioTrack !== "") {
+		parameters += "&audioTrack=" + audioTrack;
+	}
+	parameters += "&";
+	getResponseNode(auth, callback, "hls", parameters);
 }
 
 /**
@@ -51,9 +77,13 @@ function hls(auth, id, bitRate, audioTrack) {
  * @param   {string} format Preferred captions format ("srt" or "vtt").
  * @param {function} callback Returns the raw video captions.
  */
-function getCaptions(auth, id, format) {
-	var result;
-	return result;
+function getCaptions(auth, id, format, callback) {
+	var parameters = "&id=" + id;
+	if (format !== "") {
+		parameters += "&format=" + format;
+	}
+	parameters += "&";
+	getResponseNode(auth, callback, "getCaptions", parameters);
 }
 
 /**
@@ -63,9 +93,13 @@ function getCaptions(auth, id, format) {
  * @param   {string} size If specified, scale image to this size.
  * @param {function} callback Returns the cover art image in binary form.
  */
-function getCoverArt(auth, id, size) {
-	var result;
-	return result;
+function getCoverArt(auth, id, size, callback) {
+	var parameters = "&id=" + id;
+	if (size !== "") {
+		parameters += "&size=" + size;
+	}
+	parameters += "&";
+	getResponseNode(auth, callback, "getCoverArt", parameters);
 }
 
 /**
@@ -75,9 +109,16 @@ function getCoverArt(auth, id, size) {
  * @param   {string} title  The song title.
  * @param {function} callback Returns a <subsonic-response> element with a nested <lyrics> element on success. The <lyrics> element is empty if no matching lyrics was found.
  */
-function getLyrics(auth, artist, title) {
-	var result;
-	return result;
+function getLyrics(auth, artist, title, callback) {
+	var parameters = null;
+	if (artist !== "") {
+		parameters += "&artist=" + artist;
+	}
+	if (title !== "") {
+		parameters += "&title=" + title;
+	}
+	parameters += "&";
+	getResponseNode(auth, callback, "getLyrics", parameters);
 }
 
 /**
@@ -86,7 +127,7 @@ function getLyrics(auth, artist, title) {
  * @param   {string} username The user in question.
  * @param {function} callback Returns the avatar image in binary form.
  */
-function getAvatar(auth, username) {
-	var result;
-	return result;
+function getAvatar(auth, username, callback) {
+	var parameters = "&username=" + username + "&";
+	getResponseNode(auth, callback, "getAvatar", parameters);
 }

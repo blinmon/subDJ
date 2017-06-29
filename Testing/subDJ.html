@@ -410,7 +410,7 @@
 					<legend data-target="#stream" data-toggle="collapse">stream<i class="fa fa-eye"></i></legend>
 					<div id="stream" class="form-group collapse">
 						<label for="">id:</label>
-						<input type="text" class="form-control" id="steam_id">
+						<input type="text" class="form-control" id="stream_id">
 						<label for="">maxBitRate:</label>
 						<input type="text" class="form-control" id="stream_maxBitRate">
 						<label for="">format:</label>
@@ -423,13 +423,13 @@
 						<input type="text" class="form-control" placeholder="default: false" id="stream_estimateContentLength">
 						<label for="">converted:</label>
 						<input type="text" class="form-control" placeholder="default: false" id="stream_converted">
-						<button type="button" class="btn btn-primary">stream()</button>
+						<button type="button" onclick="_stream()" class="btn btn-primary">stream()</button>
 					</div>
 					<legend data-target="#download" data-toggle="collapse">download<i class="fa fa-eye"></i></legend>
 					<div id="download" class="form-group collapse">
 						<label for="">id:</label>
 						<input type="text" class="form-control" id="download_id">
-						<button type="button" class="btn btn-primary">download()</button>
+						<button type="button" onclick="_download()" class="btn btn-primary">download()</button>
 					</div>
 					<legend data-target="#hls" data-toggle="collapse">hls <i class="fa fa-eye"></i></legend>
 					<div id="hls" class="form-group collapse">
@@ -439,7 +439,7 @@
 						<input type="text" class="form-control" id="hls_bitRate">
 						<label for="">audioTrack:</label>
 						<input type="text" class="form-control" id="hls_audioTrack">
-						<button type="button" class="btn btn-primary">hls()</button>
+						<button type="button" onclick="_hls()" class="btn btn-primary">hls()</button>
 					</div>
 					<legend data-target="#getCaptions" data-toggle="collapse">getCaptions<i class="fa fa-eye"></i></legend>
 					<div id="getCaptions" class="form-group collapse">
@@ -447,7 +447,7 @@
 						<input type="text" class="form-control" id="getCaption_id">
 						<label for="">format:</label>
 						<input type="text" class="form-control" id="getCaption_format">
-						<button type="button" class="btn btn-primary">getCaptions()</button>
+						<button type="button" onclick="_getCaptions()" class="btn btn-primary">getCaptions()</button>
 					</div>
 					<legend data-target="#getCoverArt" data-toggle="collapse">getCoverArt<i class="fa fa-eye"></i></legend>
 					<div id="getCoverArt" class="form-group collapse">
@@ -455,7 +455,7 @@
 						<input type="text" class="form-control" id="getCoverArt_id">
 						<label for="">size:</label>
 						<input type="text" class="form-control" id="getCoverArt_size">
-						<button type="button" class="btn btn-primary">getCoverArt()</button>
+						<button type="button" onclick="_getCoverArt()" class="btn btn-primary">getCoverArt()</button>
 					</div>
 					<legend data-target="#getLyrics" data-toggle="collapse">getLyrics<i class="fa fa-eye"></i></legend>
 					<div id="getLyrics" class="form-group collapse">
@@ -463,13 +463,13 @@
 						<input type="text" class="form-control" id="getLyrics_artists">
 						<label for="">title:</label>
 						<input type="text" class="form-control" id="getLyrics_title">
-						<button type="button" class="btn btn-primary">getLyrics()</button>
+						<button type="button" onclick="_getLyrics()" class="btn btn-primary">getLyrics()</button>
 					</div>
 					<legend data-target="#getAvatar" data-toggle="collapse">getAvatar<i class="fa fa-eye"></i></legend>
 					<div id="getAvatar" class="form-group collapse">
 						<label for="">username:</label>
 						<input type="text" class="form-control" id="getAvatar_username">
-						<button type="button" class="btn btn-primary">getAvatar()</button>
+						<button type="button" onclick="_getAvatar()" class="btn btn-primary">getAvatar()</button>
 					</div>
 				</div>
 			</div>
@@ -481,10 +481,10 @@
 						<label for="">id:</label>
 						<input type="text" class="form-control" id="star_id">
 						<label for="">albumId:</label>
-						<input type="text" class="form-control" id="star_text">
+						<input type="text" class="form-control" id="star_albumId">
 						<label for="">artistId:</label>
 						<input type="text" class="form-control" id="star_artistId">
-						<button type="button" class="btn btn-primary">star()</button>
+						<button type="button" onclick="_star()" class="btn btn-primary">star()</button>
 					</div>
 					<legend data-target="#unstar" data-toggle="collapse">unstar<i class="fa fa-eye"></i></legend>
 					<div id="unstar" class="form-group collapse">
@@ -494,7 +494,7 @@
 						<input type="text" class="form-control" id="unstar_albumId">
 						<label for="">artistId:</label>
 						<input type="text" class="form-control" id="unstar_artistId">
-						<button type="button" class="btn btn-primary">star()</button>
+						<button type="button" onclick="_unstar()" class="btn btn-primary">unstar()</button>
 					</div>
 					<legend data-target="#setRating" data-toggle="collapse">setRating<i class="fa fa-eye"></i></legend>
 					<div id="setRating" class="form-group collapse">
@@ -502,7 +502,7 @@
 						<input type="text" class="form-control" id="setRating_id">
 						<label for="">rating:</label>
 						<input type="text" class="form-control" id="setRating_rating">
-						<button type="button" class="btn btn-primary">setRating()</button>
+						<button type="button" onclick="_setRating()" class="btn btn-primary">setRating()</button>
 					</div>
 					<legend data-target="#scrobble" data-toggle="collapse">scrobble<i class="fa fa-eye"></i></legend>
 					<div id="scrobble" class="form-group collapse">
@@ -512,7 +512,7 @@
 						<input type="text" class="form-control" id="scrobble_time">
 						<label for="">submission:</label>
 						<input type="text" class="form-control" placeholder="default: true" id="scrobble_submission">
-						<button type="button" class="btn btn-primary">scrobble()</button>
+						<button type="button" onclick="_scrobble()" class="btn btn-primary">scrobble()</button>
 					</div>
 				</div>
 			</div>
@@ -523,7 +523,7 @@
 					<h2>Sharing<small>.js</small></h2>
 					<legend data-target="#getShares" data-toggle="collapse">getShares<i class="fa fa-eye"></i></legend>
 					<div id="getShares" class="collapse">
-						<button type="button" class="btn btn-primary">getShares()</button>
+						<button type="button" onclick="_getShares()" class="btn btn-primary">getShares()</button>
 					</div>
 					<legend data-target="#createShare" data-toggle="collapse">createShare<i class="fa fa-eye"></i></legend>
 					<div id="createShare" class="form-group collapse">
@@ -533,7 +533,7 @@
 						<input type="text" class="form-control" id="createShare_description">
 						<label for="">expires:</label>
 						<input type="text" class="form-control" id="createShare_expires">
-						<button type="button" class="btn btn-primary">createShare()</button>
+						<button type="button" onclick="_createShare()" class="btn btn-primary">createShare()</button>
 					</div>
 					<legend data-target="#updateShare" data-toggle="collapse">updateShare<i class="fa fa-eye"></i></legend>
 					<div id="updateShare" class="form-group collapse">
@@ -543,13 +543,13 @@
 						<input type="text" class="form-control" id="updateShare_description">
 						<label for="">expires:</label>
 						<input type="text" class="form-control" id="updateShare_expires">
-						<button type="button" class="btn btn-primary">createShare()</button>
+						<button type="button" onclick="_createShare()" class="btn btn-primary">createShare()</button>
 					</div>
 					<legend data-target="#deleteShare" data-toggle="collapse">deleteShare<i class="fa fa-eye"></i></legend>
 					<div id="deleteShare" class="form-group collapse">
 						<label for="">id:</label>
 						<input type="text" class="form-control" id="deleteShare_id">
-						<button type="button" class="btn btn-primary">deleteShare()</button>
+						<button type="button" onclick="_deleteShare()" class="btn btn-primary">deleteShare()</button>
 					</div>
 				</div>
 			</div>
@@ -558,43 +558,45 @@
 					<h2>Podcast<small>.js</small></h2>
 					<legend data-target="#getPodcasts" data-toggle="collapse">getPodcasts <i class="fa fa-eye"></i></legend>
 					<div id="getPodcasts" class="form-group collapse">
+						<label for="">includeEpisodes:</label>
+						<input type="text" class="form-control" id="getPodcasts_includeEpisodes">
 						<label for="">id:</label>
 						<input type="text" class="form-control" id="getPodcasts_id">
-						<button type="button" class="btn btn-primary">getPodcasts()</button>
+						<button type="button" onclick="_getPodcasts()" class="btn btn-primary">getPodcasts()</button>
 					</div>
 					<legend data-target="#getNewestPodcasts" data-toggle="collapse">getNewestPodcasts<i class="fa fa-eye"></i></legend>
 					<div id="getNewestPodcasts" class="form-group collapse">
 						<label for="">count:</label>
 						<input type="text" class="form-control" id="getNewestPodcasts_count">
-						<button type="button" class="btn btn-primary">getNewestPodcasts()</button>
+						<button type="button" onclick="_getNewestPodcasts()" class="btn btn-primary">getNewestPodcasts()</button>
 					</div>
 					<legend data-target="#refreshPodcasts" data-toggle="collapse">refreshPodcasts<i class="fa fa-eye"></i></legend>
 					<div id="refreshPodcasts" class="collapse">
-						<button type="button" class="btn btn-primary">refreshPodcasts()</button>
+						<button type="button" onclick="_refreshPodcasts()" class="btn btn-primary">refreshPodcasts()</button>
 					</div>
 					<legend data-target="#createPodcastChannel" data-toggle="collapse">createPodcastChannel<i class="fa fa-eye"></i></legend>
 					<div id="createPodcastChannel" class="form-group collapse">
 						<label for="">url:</label>
 						<input type="text" class="form-control" id="createPodcastChannel_url">
-						<button type="button" class="btn btn-primary">createPodcastChannel()</button>
+						<button type="button" onclick="_createPodcastChannel()" class="btn btn-primary">createPodcastChannel()</button>
 					</div>
 					<legend data-target="#deletePodcastChannel" data-toggle="collapse">deletePodcastChannel<i class="fa fa-eye"></i></legend>
 					<div id="deletePodcastChannel" class="form-group collapse">
 						<label for="">id:</label>
 						<input type="text" class="form-control" id="deletePodcastChannel_id">
-						<button type="button" class="btn btn-primary">deletePodcastChannel()</button>
+						<button type="button" onclick="_deletePodcastChannel()" class="btn btn-primary">deletePodcastChannel()</button>
 					</div>
 					<legend data-target="#deletePodcastEpisode" data-toggle="collapse">deletePodcastEpisode<i class="fa fa-eye"></i></legend>
 					<div id="deletePodcastEpisode" class="form-group collapse">
 						<label for="">id:</label>
 						<input type="text" class="form-control" id="deletePodcastEpisode_id">
-						<button type="button" class="btn btn-primary">deletePodcastEpisode()</button>
+						<button type="button" onclick="_deletePodcastEpisode()" class="btn btn-primary">deletePodcastEpisode()</button>
 					</div>
 					<legend data-target="#downloadPodcastEpisode" data-toggle="collapse">downloadPodcastEpisode<i class="fa fa-eye"></i></legend>
 					<div id="downloadPodcastEpisode" class="form-group collapse">
 						<label for="">id:</label>
 						<input type="text" class="form-control" id="downloadPodcastEpisode_id">
-						<button type="button" class="btn btn-primary">downloadPodcastEpisode()</button>
+						<button type="button" onclick="_downloadPodcastEpisode()" class="btn btn-primary">downloadPodcastEpisode()</button>
 					</div>
 				</div>
 			</div>
@@ -613,7 +615,7 @@
 						<input type="text" class="form-control" id="jukeboxControl_id">
 						<label for="">gain:</label>
 						<input type="text" class="form-control" id="jukeboxControl_gain">
-						<button type="button" class="btn btn-primary">jukeboxControl()</button>
+						<button type="button" onclick="_jukeboxControl()" class="btn btn-primary">jukeboxControl()</button>
 					</div>
 				</div>
 			</div>
@@ -622,7 +624,7 @@
 					<h2>InternetRadio<small>.js</small></h2>
 					<legend data-target="#getInternetRadioStations" data-toggle="collapse">getInternetRadioStations<i class="fa fa-eye"></i></legend>
 					<div id="getInternetRadioStations" class="collapse">
-						<button type="button" class="btn btn-primary">getInternetRadioStations()</button>
+						<button type="button" onclick="_getInternetRadioStations()" class="btn btn-primary">getInternetRadioStations()</button>
 					</div>
 				</div>
 			</div>
@@ -635,13 +637,13 @@
 					<div id="getChatMessages" class="form-group collapse">
 						<label for="">since:</label>
 						<input type="text" class="form-control" id="getChatMessages_since">
-						<button type="button" class="btn btn-primary">getChatMessages()</button>
+						<button type="button" onclick="_getChatMessages()" class="btn btn-primary">getChatMessages()</button>
 					</div>
 					<legend data-target="#addChatMessage" data-toggle="collapse">addChatMessage<i class="fa fa-eye"></i></legend>
 					<div id="addChatMessage" class="form-group collapse">
 						<label for="">message:</label>
-						<input type="text" class="form-control" id="addCHatMessage_message">
-						<button type="button" class="btn btn-primary">addChatMessage()</button>
+						<input type="text" class="form-control" id="addChatMessage_message">
+						<button type="button" onclick="_addChatMessage()" class="btn btn-primary">addChatMessage()</button>
 					</div>
 				</div>
 			</div>
@@ -757,7 +759,7 @@
 					<h2>Bookmarks<small>.js</small></h2>
 					<legend data-target="#getBookmarks" data-toggle="collapse">getBookmarks<i class="fa fa-eye"></i></legend>
 					<div id="getBookmarks" class="collapse">
-						<button type="button" class="btn btn-primary">getBookmarks()</button>
+						<button type="button" onclick="_getBookmarks()" class="btn btn-primary">getBookmarks()</button>
 					</div>
 					<legend data-target="#createBookmark" data-toggle="collapse">createBookmark<i class="fa fa-eye"></i></legend>
 					<div id="createBookmark" class="form-group collapse">
@@ -767,17 +769,17 @@
 						<input type="text" class="form-control" id="createBookmark_position">
 						<label for="">comment:</label>
 						<input type="text" class="form-control" id="createBookmark_comment">
-						<button type="button" class="btn btn-primary">createBookmark()</button>
+						<button type="button" onclick="_createBookmark()" class="btn btn-primary">createBookmark()</button>
 					</div>
 					<legend data-target="#deleteBookmark" data-toggle="collapse">deleteBookmark<i class="fa fa-eye"></i></legend>
 					<div id="deleteBookmark" class="form-group collapse">
 						<label for="">id:</label>
 						<input type="text" class="form-control" id="deleteBookmark_id">
-						<button type="button" class="btn btn-primary">deleteBookmark()</button>
+						<button type="button" onclick="_deleteBookmark()" class="btn btn-primary">deleteBookmark()</button>
 					</div>
 					<legend data-target="#getPlayQueue" data-toggle="collapse">getPlayQueue<i class="fa fa-eye"></i></legend>
 					<div id="getPlayQueue" class="collapse">
-						<button type="button" class="btn btn-primary">getPlayQueue()</button>
+						<button type="button" onclick="_getPlayQueue()" class="btn btn-primary">getPlayQueue()</button>
 					</div>
 					<legend data-target="#savePlayQueue" data-toggle="collapse">savePlayQueue<i class="fa fa-eye"></i></legend>
 					<div id="savePlayQueue" class="form-group collapse">
@@ -787,7 +789,7 @@
 						<input type="text" class="form-control" id="savePlayQueue_current">
 						<label for="">position:</label>
 						<input type="text" class="form-control" id="savePlayQueue_position">
-						<button type="button" class="btn btn-primary">savePlayQueue()</button>
+						<button type="button" onclick="_savePlayQueue()" class="btn btn-primary">savePlayQueue()</button>
 					</div>
 				</div>
 			</div>
@@ -796,11 +798,11 @@
 					<h2>MediaScanning<small>.js</small></h2>
 					<legend data-target="#getScanStatus" data-toggle="collapse">getScanStatus<i class="fa fa-eye"></i></legend>
 					<div id="getScanStatus" class="collapse">
-						<button type="button" class="btn btn-primary">getScanStatus()</button>
+						<button type="button" onclick="_getScanStatus()" class="btn btn-primary">getScanStatus()</button>
 					</div>
 					<legend data-target="#startScan" data-toggle="collapse">startScan<i class="fa fa-eye"></i></legend>
 					<div id="startScan" class="collapse">
-						<button type="button" class="btn btn-primary">startScan()</button>
+						<button type="button" onclick="_startScan()" class="btn btn-primary">startScan()</button>
 					</div>
 				</div>
 			</div>
@@ -824,11 +826,12 @@
 	<script src="js/Playlists.js"></script>
 	<script src="js/Podcast.js"></script>
 	<script src="js/Searching.js"></script>
-	<script src="js/Searching.js"></script>
+	<script src="js/Sharing.js"></script>
 	<script src="js/System.js"></script>
 	<script src="js/UserManagement.js"></script>
 	<script>
 		/* FIXME Auths */
+		/* TODO Save user forms to cookies */
 		var auth = new Authenticate("http://zobris.duckdns.org:4040", "", "", "1.14.0", "subDJ");
 
 		function log(result) {
@@ -935,35 +938,40 @@
 		 */
 
 		function _getBookmarks() {
-			var result = Bookmarks.getBookmarks(auth);
-			log(result);
+			getBookmarks(auth, function() {
+				log(this);
+			});
 		}
 
 		function _createBookmark() {
 			var id = getForm("createBookmark_id");
 			var position = getForm("createBookmark_position");
 			var comment = getForm("createUser_comment");
-			var result = Bookmark.createBookmark(auth, id, position, comment);
-			log(result);
+			createBookmark(auth, id, position, comment, function() {
+				log(this);
+			});
 		}
 
 		function _deleteBookmark() {
 			var id = getForm("deleteBookmark_id");
-			var result = Bookmark.deleteBookmark(auth, id);
-			log(result);
+			deleteBookmark(auth, id, function() {
+				log(this);
+			});
 		}
 
 		function _getPlayQueue() {
-			var result = Bookmark.getPlayQueue(auth);
-			log(result);
+			getPlayQueue(auth, function() {
+				log(this);
+			});
 		}
 
 		function _savePlayQueue() {
 			var id = getForm("savePlayQueue_id");
 			var current = getForm("savePlayQueue_current");
 			var position = getForm("savePlayQueue_position");
-			var result = Browsing.savePlayQueue(auth, id, current, position);
-			log(result);
+			savePlayQueue(auth, id, current, position, function() {
+				log(this);
+			});
 		}
 
 		/*
@@ -1101,14 +1109,16 @@
 
 		function _getChatMessages() {
 			var since = getForm("getChatMessages_since");
-			var result = Chat.getChatMessages(auth, since);
-			log(result);
+			getChatMessages(auth, since, function() {
+				log(this);
+			});
 		}
 
 		function _addChatMessage() {
 			var message = getForm("addChatMessage_message");
-			var result = Chat.addChatMessage(auth, message);
-			log(result);
+			addChatMessage(auth, message, function() {
+				log(this);
+			});
 		}
 
 		/*
@@ -1116,8 +1126,9 @@
 		 */
 
 		function _getInternetRadioStations() {
-			var result = InternetRadio.getInternetRadioStations(auth);
-			log(result);
+			getInternetRadioStations(auth, function() {
+				log(this);
+			});
 		}
 
 		/*
@@ -1130,8 +1141,9 @@
 			var offset = getForm("jukeboxControl_offset");
 			var id = getForm("jukeboxControl_id");
 			var gain = getForm("jukeboxControl_gain");
-			var result = Jukebox.jukeboxControl(auth, action, index, offset, id, gain);
-			log(result);
+			jukeboxControl(auth, action, index, offset, id, gain, function() {
+				log(this);
+			});
 		}
 
 		/*
@@ -1142,29 +1154,35 @@
 			var id = getForm("star_id");
 			var albumId = getForm("star_albumId");
 			var artistId = getForm("star_artistId");
-			var result = MediaAnnotation.star(auth, id, albumId, artistId);
-			log(result);
+			star(auth, id, albumId, artistId, function() {
+				log(this);
+			});
 		}
 
 		function _unstar() {
 			var id = getForm("unstar_id");
 			var albumId = getForm("unstar_albumId");
 			var artistId = getForm("unstar_artistId");
-			var result = MediaAnnotation.unstar(auth, id, albumId, artistId);
-			log(result);
+			unstar(auth, id, albumId, artistId, function() {
+				log(this);
+			});
 		}
 
 		function _setRating() {
 			var id = getForm("setRating_id");
 			var rating = getForm("setRating_rating");
-			var result = MediaAnnotation.setRating(auth, id, rating);
-			log(result);
+			setRating(auth, id, rating, function() {
+				log(this);
+			});
 		}
 
 		function _scrobble() {
 			var id = getForm("scrobble_id");
 			var time = getForm("scrobble_time");
 			var submission = getForm("scrobble_submission");
+			scrobble(auth, id, time, submission, function() {
+				log(this);
+			});
 		}
 
 		/*
@@ -1173,55 +1191,62 @@
 
 		function _stream() {
 			var id = getForm("stream_id");
-			var maxBitRate = getForm("stream_maxBitRates");
+			var maxBitRate = getForm("stream_maxBitRate");
 			var format = getForm("stream_format");
 			var timeOffset = getForm("stream_timeOffset");
 			var size = getForm("stream_size");
 			var estimateContentLength = getForm("stream_estimateContentLength");
 			var converted = getForm("stream_converted");
-			var result = MediaRetrieval.stream(auth, id, maxBitRate, format, timeOffset, size, estimateContentLength, converted);
-			log(result);
+			stream(auth, id, maxBitRate, format, timeOffset, size, estimateContentLength, converted, function() {
+				log(this);
+			});
 		}
 
 		function _download() {
 			var id = getForm("download_id");
-			var result = MediaRetrieval.download(auth, id);
-			log(result);
+			download(auth, id, function() {
+				log(this);
+			});
 		}
 
 		function _hls() {
 			var id = getForm("hls_id");
 			var bitRate = getForm("hls_bitRate");
 			var audioTrack = getForm("hls_audioTrack");
-			var result = MediaRetrieval.hls(auth, id, bitRate, audioTrack);
-			log(result);
+			hls(auth, id, bitRate, audioTrack, function() {
+				log(this);
+			});
 		}
 
 		function _getCaptions() {
 			var id = getForm("getCaptions_id");
 			var format = getForm("getCaptions_format");
-			var result = MediaRetrieval.getCaptions(auth, id, format);
-			log(result);
+			getCaptions(auth, id, format, function() {
+				log(this);
+			});
 		}
 
 		function _getCoverArt() {
 			var id = getForm("getCaptions_id");
 			var size = getForm("getCaptions_size");
-			var result = MediaRetrieval.getCoverArt(auth, id, size);
-			log(result);
+			getCoverArt(auth, id, size, function() {
+				log(this);
+			});
 		}
 
 		function _getLyrics() {
 			var artist = getForm("getLyrics_artist");
 			var title = getForm("getLyrics_title");
-			var result = MediaRetrieval.getLyrics(auth, artist, title);
-			log(result);
+			getLyrics(auth, artist, title, function() {
+				log(this);
+			});
 		}
 
 		function _getAvatar() {
 			var username = getForm("getAvatar_username");
-			var result = MediaRetrieval.getAvatar(auth, username);
-			log(result);
+			getAvatar(auth, username, function() {
+				log(this);
+			});
 		}
 
 		/*
@@ -1229,13 +1254,15 @@
 		 */
 
 		function _getScanStatus() {
-			var result = MediaScanning.getScanStatus(auth);
-			log(result);
+			getScanStatus(auth, function() {
+				log(this);
+			});
 		}
 
-		function _getScan() {
-			var result = MediaScanning.getScan(auth);
-			log(result);
+		function _startScan() {
+			startScan(auth, function() {
+				log(this);
+			});
 		}
 
 		/*
@@ -1289,44 +1316,52 @@
 		 */
 
 		function _getPodcasts() {
+			var includeEpisodes = getForm("getPodcasts_includeEpisodes");
 			var id = getForm("getPodcasts_id");
-			var result = Podcast.getPodcasts(auth, id);
-			log(result);
+			getPodcasts(auth, includeEpisodes, id, function() {
+				log(this);
+			});
 		}
 
 		function _getNewestPodcasts() {
 			var count = getForm("getNewestPodcasts_count");
-			var result = Podcast.getNewestPodcasts(auth, count);
-			log(result);
+			getNewestPodcasts(auth, count, function() {
+				log(this);
+			});
 		}
 
 		function _refreshPodcasts() {
-			var result = Podcast.refreshPodcasts(auth);
-			log(result);
+			refreshPodcasts(auth, function() {
+				log(this);
+			});
 		}
 
 		function _createPodcastChannel() {
 			var url = getForm("createPodcastChannel_url");
-			var result = Podcast.createPodcastChannel(auth, url);
-			log(result);
+			createPodcastChannel(auth, url, function() {
+				log(this);
+			});
 		}
 
 		function _deletePodcastChannel() {
 			var id = getForm("deletePodcastChannel_id");
-			var result = Podcast.deletePodcastChannel(auth, id);
-			log(result);
+			deletePodcastChannel(auth, id, function() {
+				log(this);
+			});
 		}
 
 		function _deletePodcastEpisode() {
 			var id = getForm("deletePodcastEpisode_id");
-			var result = Podcast.deletePodcastEpisode(auth, id);
-			log(result);
+			deletePodcastEpisode(auth, id, function() {
+				log(this);
+			});
 		}
 
 		function _downloadPodcastEpisode() {
 			var id = getForm("downloadPodcastEpisode_id");
-			var result = Podcast.downloadPodcastEpisode(auth, id);
-			log(result);
+			downloadPodcastEpisode(auth, id, function() {
+				log(this);
+			});
 		}
 
 		/*
@@ -1379,30 +1414,34 @@
 		 */
 
 		function _getShares() {
-			var result = Sharing.getShares(auth);
-			log(result);
+			getShares(auth, function() {
+				log(this);
+			});
 		}
 
 		function _createShare() {
 			var id = getForm("createShare_id");
 			var description = getForm("createShare_description");
 			var expires = getForm("createShare_expires");
-			var result = Sharing.createShare(auth, id, description, expires);
-			log(result);
+			createShare(auth, id, description, expires, function() {
+				log(this);
+			});
 		}
 
 		function _updateShare() {
 			var id = getForm("updateShare_id");
 			var description = getForm("updateShare_description");
 			var expires = getForm("updateShare_expires");
-			var result = Sharing.updateShare(auth, id, description, expires);
-			log(result);
+			updateShare(auth, id, description, expires, function() {
+				log(this);
+			});
 		}
 
 		function _deleteShare() {
 			var id = getForm("deleteShare_id");
-			var result = Sharing.deleteShare(auth, id);
-			log(result);
+			deleteShare(auth, id, function() {
+				log(this);
+			});
 		}
 
 		/*
