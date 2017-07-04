@@ -25,28 +25,29 @@
             <div class="col-sm-4 col-md-4 col-lg-4">
                 <div id="login" class="well">
                     <form action="" method="POST" role="form">
+                        <!-- TODO Implement Login Form -->
                         <legend>Subsonic Login Credentials</legend>
                         <div class="form-group">
                             <label for="">Server URL:</label>
-                            <input type="text" class="form-control" id="" placeholder="http://zobris.duckdns.org:4040">
+                            <input type="text" class="form-control" id="login_url" placeholder="http://zobris.duckdns.org:4040">
                         </div>
                         <div class="form-group">
                             <label for="">Subsonic Username:</label>
-                            <input type="text" class="form-control" id="" placeholder="test">
+                            <input type="text" class="form-control" id="login_username" placeholder="test">
                         </div>
                         <div class="form-group">
                             <label for="">Subsonic Password:</label>
-                            <input type="password" class="form-control" id="" placeholder="123">
+                            <input type="password" class="form-control" id="login_password" placeholder="123">
                         </div>
                         <div class="form-group">
                             <label for="">REST Version:</label>
-                            <input type="text" class="form-control" id="" placeholder="1.14.0">
+                            <input type="text" class="form-control" id="login_rest_version" placeholder="1.14.0">
                         </div>
                         <div class="form-group">
                             <label for="">App Name:</label>
-                            <input type="text" class="form-control" id="" placeholder="subDJ">
+                            <input type="text" class="form-control" id="login_app_name" placeholder="subDJ">
                         </div>
-                        <button type="button" class="btn btn-primary">Save</button>
+                        <button type="button" onclick="saveForm()" class="btn btn-primary">Save</button>
                     </form>
                 </div>
             </div>
@@ -831,8 +832,14 @@
     <script src="js/UserManagement.js"></script>
     <script>
         /* FIXME Auths */
-        /* TODO Save user forms to cookies */
-        var auth = new Authenticate("http://zobris.duckdns.org:4040", "", "", "1.14.0", "subDJ");
+        $('document').ready(loadForm());
+        var items = [
+            "loginUrl", "loginUsername", "loginPassword", "loginRestVersion", "loginAppName"
+        ];
+        var ids = [
+            "login_url", "login_username", "login_password", "login_rest_version", "login_app_name"
+        ];
+        var auth = new Authenticate(localStorage.getItem(items[0]), localStorage.getItem(items[1]), localStorage.getItem(items[2]), localStorage.getItem(items[3]), localStorage.getItem(items[4]), localStorage.getItem(items[5]));
 
         function log(result) {
             console.log(result);
@@ -842,6 +849,39 @@
         function getForm(id) {
             return document.getElementById(id).value;
         }
+
+        function setForm(id, value) {
+            document.getElementById(id).value = value;
+        }
+
+        function saveForm() {
+            var items = [
+                "loginUrl", "loginUsername", "loginPassword", "loginRestVersion", "loginAppName"
+            ];
+            var ids = [
+                "login_url", "login_username", "login_password", "login_rest_version", "login_app_name"
+            ];
+            for (var i = 0; i < items.length; i++) {
+                localStorage.setItem(items[i], getForm(ids[i]));
+            }
+            alert("Login Settings Saved!");
+        }
+
+        function loadForm() {
+            var items = [
+                "loginUrl", "loginUsername", "loginPassword", "loginRestVersion", "loginAppName"
+            ];
+            var ids = [
+                "login_url", "login_username", "login_password", "login_rest_version", "login_app_name"
+            ];
+            for (var i = 0; i < items.length; i++) {
+                setForm(ids[i], localStorage.getItem(items[i]));
+            }
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /*
          *	Album.js Implmentation
