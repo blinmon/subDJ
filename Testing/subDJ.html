@@ -2,1596 +2,1648 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" media="screen" href="css/subDj.css">
-    <title>subDJ Javascript API Test Page</title>
-    <!--  -->
-    <style>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" media="screen" href="css/subDj.css">
+	<title>subDJ Javascript API Test Page</title>
+	<!--  -->
+	<style>
 
 
-    </style>
+	</style>
 </head>
 
 <body>
-    <div class="jumbotron">
-        <h1><i class="fa fa-cube"></i> subDJ <i class="fa fa-music"></i></h1>
-        <p>Test control panel for the Javascript Subsonic API.</p>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-4 col-md-4 col-lg-4">
-                <div id="login" class="well">
-                    <form action="" method="POST" role="form">
-                        <!-- TODO Implement Login Form -->
-                        <legend>Subsonic Login Credentials</legend>
-                        <div class="form-group">
-                            <label for="">Server URL:</label>
-                            <input type="text" class="form-control" id="login_url" placeholder="http://zobris.duckdns.org:4040">
-                        </div>
-                        <div class="form-group">
-                            <label for="">Subsonic Username:</label>
-                            <input type="text" class="form-control" id="login_username" placeholder="test">
-                        </div>
-                        <div class="form-group">
-                            <label for="">Subsonic Password:</label>
-                            <input type="password" class="form-control" id="login_password" placeholder="123">
-                        </div>
-                        <div class="form-group">
-                            <label for="">REST Version:</label>
-                            <input type="text" class="form-control" id="login_rest_version" placeholder="1.14.0">
-                        </div>
-                        <div class="form-group">
-                            <label for="">App Name:</label>
-                            <input type="text" class="form-control" id="login_app_name" placeholder="subDJ">
-                        </div>
-                        <button type="button" onclick="saveForm()" class="btn btn-primary">Save</button>
-                    </form>
-                </div>
-            </div>
-            <div class="col-sm-8 col-md-8 col-lg-8">
-                <div id="console" class="well well-lg">
-                    <h1><i class="fa fa-desktop"></i> Output <i class="fa fa-angle-double-right"></i></h1>
-                    <p id="console_text">subDJ.html:64 d3uekc
-                        <br>subDJ.html:65 ba3d7d7b43198542489f487a269229d9
-                        <br>subDJ.html:66 http://zobris.duckdns.org:4040/rest/getLicense.view?u=test&t=102ede419a22e6286fcab0ac18d3739c&s=bnrdop&v=1.14.0&c=subDJ</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <div class="well">
-                    <h2>Authenticate<small>.js</small></h2>
-                    <legend data-target="#salt" data-toggle="collapse">salt <i class="fa fa-eye"></i></legend>
-                    <div id="salt" class="collapse">
-                        <button onclick="_salt()" type="button" class="btn btn-primary">generateSalt()</button>
-                    </div>
-                    <legend data-target="#token" data-toggle="collapse">token <i class="fa fa-eye"></i></legend>
-                    <div id="token" class="collapse">
-                        <button onclick="_token()" type="button" class="btn btn-primary">generateToken()</button>
-                    </div>
-                    <legend data-target="#apiCall" data-toggle="collapse">apiCall <i class="fa fa-eye"></i></legend>
-                    <div id="apiCall" class="collapse">
-                        <button onclick="_apiCall()" type="button" class="btn btn-primary">generateApiCall()</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="well">
-                    <h2>System<small>.js</small></h2>
-                    <legend data-target="#ping" data-toggle="collapse">ping <i class="fa fa-eye"></i></legend>
-                    <div id="ping" class="collapse">
-                        <button type="button" onclick="_ping()" class="btn btn-primary">ping()</button>
-                    </div>
-                    <legend data-target="#getLicense" data-toggle="collapse">getLicense <i class="fa fa-eye"></i></legend>
-                    <div id="getLicense" class="collapse">
-                        <button type="button" onclick="_getLicense()" class="btn btn-primary">getLicense()</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="well">
-                    <h2>Browsing<small>.js</small></h2>
-                    <legend data-target="#getMusicFolders" data-toggle="collapse">getMusicFolders<i class="fa fa-eye"></i></legend>
-                    <div id="getMusicFolders" class="collapse">
-                        <button type="button" onclick="_getMusicFolders()" class="btn btn-primary">getMusicFolders()</button>
-                    </div>
-                    <legend data-target="#getIndexes" data-toggle="collapse">getIndexes <i class="fa fa-eye"></i></legend>
-                    <div id="getIndexes" class="form-group collapse">
-                        <label for="">musicFolderId:</label>
-                        <input type="text" class="form-control" id="getIndexes_musicFolderId">
-                        <label for="">ifModifiedSince:</label>
-                        <input type="text" class="form-control" id="getIndexes_ifModifiedSince">
-                        <button type="button" onclick="_getIndexes()" class="btn btn-primary">getIndexes()</button>
-                    </div>
-                    <legend data-target="#getMusicDirectory" data-toggle="collapse">getMusicDirectory <i class="fa fa-eye"></i></legend>
-                    <div id="getMusicDirectory" class="form-group collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="getMusicDirectory_id">
-                        <button type="button" onclick="_getMusicDirectory()" class="btn btn-primary">getMusicDirectory()</button>
-                    </div>
-                    <legend data-target="#getGenres" data-toggle="collapse">getGenres <i class="fa fa-eye"></i></legend>
-                    <div id="getGenres" class="collapse">
-                        <button type="button" onclick="_getGenres()" class="btn btn-primary">getGenres()</button>
-                    </div>
-                    <legend data-target="#getArtists" data-toggle="collapse">getArtists <i class="fa fa-eye"></i></legend>
-                    <div id="getArtists" class="form-group collapse">
-                        <label>musicFolderId:</label>
-                        <input type="text" class="form-control" id="getArtists_musicFolderId">
-                        <button type="button" onclick="_getArtists()" class="btn btn-primary">getArtists()</button>
-                    </div>
-                    <legend data-target="#getArtist" data-toggle="collapse">getArtist <i class="fa fa-eye"></i></legend>
-                    <div id="getArtist" class="form-group collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="getArtist_id">
-                        <button type="button" onclick="_getArtist()" class="btn btn-primary">getArtist()</button>
-                    </div>
-                    <legend data-target="#getAlbum" data-toggle="collapse">getAlbum <i class="fa fa-eye"></i></legend>
-                    <div id="getAlbum" class="form-group collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="getAlbum_id">
-                        <button type="button" onclick="_getAlbum()" class="btn btn-primary">getAlbum()</button>
-                    </div>
-                    <legend data-target="#getSong" data-toggle="collapse">getSong <i class="fa fa-eye"></i></legend>
-                    <div id="getSong" class="form-group collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="getSong_id">
-                        <button type="button" onclick="_getSong()" class="btn btn-primary">getSong()</button>
-                    </div>
-                    <legend data-target="#getVideos" data-toggle="collapse">getVideos <i class="fa fa-eye"></i></legend>
-                    <div id="getVideos" class="collapse">
-                        <button type="button" onclick="_getVideos()" class="btn btn-primary">getVideos()</button>
-                    </div>
-                    <legend data-target="#getVideoInfo" data-toggle="collapse">getVideoInfo <i class="fa fa-eye"></i></legend>
-                    <div id="getVideoInfo" class="collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="getVideoInfo_id">
-                        <button type="button" onclick="_getVideoInfo()" class="btn btn-primary">getVideoInfo()</button>
-                    </div>
-                    <legend data-target="#getArtistInfo" data-toggle="collapse">getArtistInfo <i class="fa fa-eye"></i></legend>
-                    <div id="getArtistInfo" class="form-group collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="getArtistInfo_id">
-                        <label for="">count:</label>
-                        <input type="text" class="form-control" placeholder="default: 20" id="getArtistInfo_count">
-                        <label for="">includeNotPresent:</label>
-                        <input type="text" class="form-control" placeholder="default: false" id="getArtistInfo_includeNotPresent">
-                        <button type="button" onclick="_getArtistInfo()" class="btn btn-primary">getArtistInfo()</button>
-                    </div>
-                    <legend data-target="#getArtistInfo2" data-toggle="collapse">getArtistInfo2 <i class="fa fa-eye"></i></legend>
-                    <div id="getArtistInfo2" class="form-group collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="getArtistInfo2_id">
-                        <label for="">count:</label>
-                        <input type="text" class="form-control" placeholder="default: 20" id="getArtistInfo2_count">
-                        <label for="">includeNotPresent:</label>
-                        <input type="text" class="form-control" placeholder="default: false" id="getArtistInfo2_includeNotPresent">
-                        <button type="button" onclick="_getArtistInfo2()" class="btn btn-primary">getArtistInfo2()</button>
-                    </div>
-                    <legend data-target="#getAlbumInfo" data-toggle="collapse">getAlbumInfo <i class="fa fa-eye"></i></legend>
-                    <div id="getAlbumInfo" class="collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="getAlbumInfo_id">
-                        <button type="button" onclick="_getAlbumInfo()" class="btn btn-primary">getAlbumInfo()</button>
-                    </div>
-                    <legend data-target="#getAlbumInfo2" data-toggle="collapse">getAlbumInfo2 <i class="fa fa-eye"></i></legend>
-                    <div id="getAlbumInfo2" class="collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="getAlbumInfo2_id">
-                        <button type="button" onclick="_getAlbumInfo2()" class="btn btn-primary">getAlbumInfo2()</button>
-                    </div>
-                    <legend data-target="#getSimilarSongs" data-toggle="collapse">getSimilarSongs <i class="fa fa-eye"></i></legend>
-                    <div id="getSimilarSongs" class="form-group collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="getSimilarSongs_id">
-                        <label for="">count:</label>
-                        <input type="text" class="form-control" placeholder="defaut: 50" id="getSimilarSongs_count">
-                        <button type="button" onclick="_getSimilarSongs()" class="btn btn-primary">getSimilarSongs()</button>
-                    </div>
-                    <legend data-target="#getSimilarSongs2" data-toggle="collapse">getSimilarSongs2 <i class="fa fa-eye"></i></legend>
-                    <div id="getSimilarSongs2" class="form-group collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="getSimilarSongs2_id">
-                        <label for="">count:</label>
-                        <input type="text" class="form-control" placeholder="defaut: 50" id="getSimilarSongs2_count">
-                        <button type="button" onclick="_getSimilarSongs2()" class="btn btn-primary">getSimilarSongs2()</button>
-                    </div>
-                    <legend data-target="#getTopSongs" data-toggle="collapse">getTopSongs <i class="fa fa-eye"></i></legend>
-                    <div id="getTopSongs" class="form-group collapse">
-                        <label for="">artist:</label>
-                        <input type="text" class="form-control" id="getTopSongs_artist">
-                        <label for="">count:</label>
-                        <input type="text" class="form-control" placeholder="defaut: 50" id="getTopSongs_count">
-                        <button type="button" onclick="_getTopSongs()" class="btn btn-primary">getTopSongs()</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="well">
-                    <h2>Album<small>.js</small></h2>
-                    <legend data-target="#getAlbumList" data-toggle="collapse">getAlbumList <i class="fa fa-eye"></i></legend>
-                    <div id="getAlbumList" class="form-group collapse">
-                        <label for="">type:</label>
-                        <input type="text" class="form-control" id="getAlbumList_type">
-                        <label for="">size:</label>
-                        <input type="text" class="form-control" placeholder="default: 10" id="getAlbumList_size">
-                        <label for="">offset</label>
-                        <input type="text" class="form-control" placeholder="default: 0" id="getAlbumList_offset">
-                        <label for="">fromYear:</label>
-                        <input type="text" class="form-control" id="getAlbumList_fromYear">
-                        <label for="">toYear:</label>
-                        <input type="text" class="form-control" id="getAlbumList_toYear">
-                        <label for="">genre:</label>
-                        <input type="text" class="form-control" id="getAlbumList_genre">
-                        <label for="">musicFolderId:</label>
-                        <input type="text" class="form-control" id="getAlbumList_musicFolderId">
-                        <button type="button" onclick="_getAlbumList()" class="btn btn-primary">getAlbumList()</button>
-                    </div>
-                    <legend data-target="#getAlbumList2" data-toggle="collapse">getAlbumList2 <i class="fa fa-eye"></i></legend>
-                    <div id="getAlbumList2" class="form-group collapse">
-                        <label for="">type:</label>
-                        <input type="text" class="form-control" id="getAlbumList2_type">
-                        <label for="">size:</label>
-                        <input type="text" class="form-control" placeholder="default: 10" id="getAlbumList2_size">
-                        <label for="">offset</label>
-                        <input type="text" class="form-control" placeholder="default: 0" id="getAlbumList2_offset">
-                        <label for="">fromYear:</label>
-                        <input type="text" class="form-control" id="getAlbumList2_fromYear">
-                        <label for="">toYear:</label>
-                        <input type="text" class="form-control" id="getAlbumList2_toYear">
-                        <label for="">genre:</label>
-                        <input type="text" class="form-control" id="getAlbumList2_genre">
-                        <label for="">musicFolderId:</label>
-                        <input type="text" class="form-control" id="getAlbumList2_musicFolderId">
-                        <button type="button" onclick="_getAlbumList2()" class="btn btn-primary">getAlbumList2()</button>
-                    </div>
-                    <legend data-target="#getRandomSongs" data-toggle="collapse">getRandomSongs <i class="fa fa-eye"></i></legend>
-                    <div id="getRandomSongs" class="form-group collapse">
-                        <label for="">size:</label>
-                        <input type="text" class="form-control" placeholder="default: 10" id="getRandomSongs_size">
-                        <label for="">genre:</label>
-                        <input type="text" class="form-control" id="getRandomSongs_genre">
-                        <label for="">fromYear:</label>
-                        <input type="text" class="form-control" id="getRandomSongs_fromYear">
-                        <label for="">toYear:</label>
-                        <input type="text" class="form-control" id="getRandomSongs_toYear">
-                        <label for="">musicFolderId:</label>
-                        <input type="text" class="form-control" id="getRandomSongs_musicFolderId">
-                        <button type="button" onclick="_getRandomSongs()" class="btn btn-primary">getRandomSongs()</button>
-                    </div>
-                    <legend data-target="#getSongsByGenre" data-toggle="collapse">getSongsByGenre <i class="fa fa-eye"></i></legend>
-                    <div id="getSongsByGenre" class="form-group collapse">
-                        <label for="">genre:</label>
-                        <input type="text" class="form-control" id="getSongsByGenre_genre">
-                        <label for="">count:</label>
-                        <input type="text" class="form-control" placeholder="default: 10" id="getSongsByGenre_count">
-                        <label for="">offset:</label>
-                        <input type="text" class="form-control" placeholder="default: 0" id="getSongsByGenre_offset">
-                        <label for="">musicFolderId:</label>
-                        <input type="text" class="form-control" id="getSongsByGenre_musicFolderId">
-                        <button type="button" onclick="_getSongsByGenre()" class="btn btn-primary">getSongsByGenre()</button>
-                    </div>
-                    <legend data-target="#getNowPlaying" data-toggle="collapse">getNowPlaying <i class="fa fa-eye"></i> </legend>
-                    <div id="getNowPlaying" class="collapse">
-                        <button type="button" onclick="_getNowPlaying()" class="btn btn-primary">getNowPlaying()</button>
-                    </div>
-                    <legend data-target="#getStarred" data-toggle="collapse">getStarred <i class="fa fa-eye"></i></legend>
-                    <div id="getStarred" class="collapse">
-                        <label for="">musicFolderId:</label>
-                        <input type="text" class="form-control" id="getStarred_musicFolderId">
-                        <button type="button" onclick="_getStarred()" class="btn btn-primary">getStarred()</button>
-                    </div>
-                    <legend data-target="#getStarred2" data-toggle="collapse">getStarred2 <i class="fa fa-eye"></i></legend>
-                    <div id="getStarred2" class="collapse">
-                        <label for="">musicFolderId:</label>
-                        <input type="text" class="form-control" id="getStarred2_musicFolderId">
-                        <button type="button" onclick="_getStarred2()" class="btn btn-primary">getStarred2()</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <div class="well">
-                    <h2>Searching<small>.js</small></h2>
-                    <legend data-target="#search" data-toggle="collapse">search <i class="fa fa-eye"></i></legend>
-                    <div id="search" class="form-group collapse">
-                        <label for="">artist:</label>
-                        <input type="text" class="form-control" id="search_artist">
-                        <label for="">album:</label>
-                        <input type="text" class="form-control" id="search_album">
-                        <label for="">title:</label>
-                        <input type="text" class="form-control" id="search_title">
-                        <label for="">any:</label>
-                        <input type="text" class="form-control" id="search_any">
-                        <label for="">count:</label>
-                        <input type="text" class="form-control" placeholder="default: 20" id="search_count">
-                        <label for="">offset:</label>
-                        <input type="text" class="form-control" placeholder="default: 0" id="search_offset">
-                        <label for="">newerThan:</label>
-                        <input type="text" class="form-control" id="search_newerThan">
-                        <button type="button" onclick="_search()" class="btn btn-primary">search()</button>
-                    </div>
-                    <legend data-target="#search2" data-toggle="collapse">search2 <i class="fa fa-eye"></i></legend>
-                    <div id="search2" class="form-group collapse">
-                        <label for="">query:</label>
-                        <input type="text" class="form-control" id="search2_query">
-                        <label for="">artistCount:</label>
-                        <input type="text" class="form-control" placeholder="default: 20" id="search2_artistCount">
-                        <label for="">artistOffset:</label>
-                        <input type="text" class="form-control" placeholder="default: 0" id="search2_artistOffset">
-                        <label for="">albumCount:</label>
-                        <input type="text" class="form-control" placeholder="default: 20" id="search2_albumCount">
-                        <label for="">albumOffset:</label>
-                        <input type="text" class="form-control" placeholder="default: 0" id="search2_albumOffset">
-                        <label for="">songCount:</label>
-                        <input type="text" class="form-control" placeholder="default: 20" id="search2_songCount">
-                        <label for="">songOffset:</label>
-                        <input type="text" class="form-control" placeholder="default: 0" id="search2_songOffset">
-                        <label for="">musicFolderId:</label>
-                        <input type="text" class="form-control" id="search2_musicFolderId">
-                        <button type="button" onclick="_search2()" class="btn btn-primary">search2()</button>
-                    </div>
-                    <legend data-target="#search3" data-toggle="collapse">search3 <i class="fa fa-eye"></i></legend>
-                    <div id="search3" class="form-group collapse">
-                        <label for="">query:</label>
-                        <input type="text" class="form-control" id="search3_query">
-                        <label for="">artistCount:</label>
-                        <input type="text" class="form-control" placeholder="default: 20" id="search3_artistCount">
-                        <label for="">artistOffset:</label>
-                        <input type="text" class="form-control" placeholder="default: 0" id="search3_artistOffset">
-                        <label for="">albumCount:</label>
-                        <input type="text" class="form-control" placeholder="default: 20" id="search3_albumCount">
-                        <label for="">albumOffset:</label>
-                        <input type="text" class="form-control" placeholder="default: 0" id="search3_albumOffset">
-                        <label for="">songCount:</label>
-                        <input type="text" class="form-control" placeholder="default: 20" id="search3_songCount">
-                        <label for="">songOffset:</label>
-                        <input type="text" class="form-control" placeholder="default: 0" id="search3_songOffset">
-                        <label for="">musicFolderId:</label>
-                        <input type="text" class="form-control" id="search3_musicFolderId">
-                        <button type="button" onclick="_search3()" class="btn btn-primary">search3()</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="well">
-                    <h2>Playlists<small>.js</small></h2>
-                    <legend data-target="#getPlaylists" data-toggle="collapse">getPlaylists <i class="fa fa-eye"></i></legend>
-                    <div id="getPlaylists" class="form-group collapse">
-                        <label for="">username:</label>
-                        <input type="text" class="form-control" id="getPlaylists_username">
-                        <button type="button" onclick="_getPlaylists()" class="btn btn-primary">getPlaylists()</button>
-                    </div>
-                    <legend data-target="#getPlaylist" data-toggle="collapse">getPlaylist <i class="fa fa-eye"></i></legend>
-                    <div id="getPlaylist" class="form-group collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="getPlaylist_id">
-                        <button type="button" onclick="_getPlaylist()" class="btn btn-primary">getPlaylist()</button>
-                    </div>
-                    <legend data-target="#createPlaylist" data-toggle="collapse">createPlaylist <i class="fa fa-eye"></i></legend>
-                    <div id="createPlaylist" class="form-group collapse">
-                        <label for="">playlistId:</label>
-                        <input type="text" class="form-control" id="createPlaylist_playlistId">
-                        <label for="">name:</label>
-                        <input type="text" class="form-control" id="createPlaylist_name">
-                        <label for="">songId:</label>
-                        <input type="text" class="form-control" id="createPlaylsit_songId">
-                        <button type="button" onclick="_createPlauylist()" class="btn btn-primary">createPlaylist()</button>
-                    </div>
-                    <legend data-target="#updatePlaylist" data-toggle="collapse">updatePlaylist<i class="fa fa-eye"></i></legend>
-                    <div id="updatePlaylist" class="form-group collapse">
-                        <label for="">playlistId:</label>
-                        <input type="text" class="form-control" id="updatePlaylist_playlistId">
-                        <label for="">name:</label>
-                        <input type="text" class="form-control" id="updatePlaylist_name">
-                        <label for="">comment:</label>
-                        <input type="text" class="form-control" id="updatePlaylist_comment">
-                        <label for="">public:</label>
-                        <input type="text" class="form-control" id="updatePlaylist_public">
-                        <label for="">songIdToAdd:</label>
-                        <input type="text" class="form-control" id="updatePlaylist_songIdToAdd">
-                        <label for="">songIndexToRemove:</label>
-                        <input type="text" class="form-control" id="updatePlaylist_songIndexToRemove">
-                        <button type="button" onclick="_updatePlaylist()" class="btn btn-primary">updatePlaylist()</button>
-                    </div>
-                    <legend data-target="#deletePlaylist" data-toggle="collapse">deletePlaylist<i class="fa fa-eye"></i></legend>
-                    <div id="deletePlaylist" class="form-group collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="deletePlaylist_id">
-                        <button type="button" onclick="_deletePlaylist()" class="btn btn-primary">deletePlaylist()</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="well">
-                    <h2>MediaRetrieval<small>.js</small></h2>
-                    <legend data-target="#stream" data-toggle="collapse">stream<i class="fa fa-eye"></i></legend>
-                    <div id="stream" class="form-group collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="stream_id">
-                        <label for="">maxBitRate:</label>
-                        <input type="text" class="form-control" id="stream_maxBitRate">
-                        <label for="">format:</label>
-                        <input type="text" class="form-control" id="stream_format">
-                        <label for="">timeOffset:</label>
-                        <input type="text" class="form-control" id="stream_timeOffset">
-                        <label for="">size:</label>
-                        <input type="text" class="form-control" id="stream_size">
-                        <label for="">estimateContentLength:</label>
-                        <input type="text" class="form-control" placeholder="default: false" id="stream_estimateContentLength">
-                        <label for="">converted:</label>
-                        <input type="text" class="form-control" placeholder="default: false" id="stream_converted">
-                        <button type="button" onclick="_stream()" class="btn btn-primary">stream()</button>
-                    </div>
-                    <legend data-target="#download" data-toggle="collapse">download<i class="fa fa-eye"></i></legend>
-                    <div id="download" class="form-group collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="download_id">
-                        <button type="button" onclick="_download()" class="btn btn-primary">download()</button>
-                    </div>
-                    <legend data-target="#hls" data-toggle="collapse">hls <i class="fa fa-eye"></i></legend>
-                    <div id="hls" class="form-group collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="hls_id">
-                        <label for="">bitRate:</label>
-                        <input type="text" class="form-control" id="hls_bitRate">
-                        <label for="">audioTrack:</label>
-                        <input type="text" class="form-control" id="hls_audioTrack">
-                        <button type="button" onclick="_hls()" class="btn btn-primary">hls()</button>
-                    </div>
-                    <legend data-target="#getCaptions" data-toggle="collapse">getCaptions<i class="fa fa-eye"></i></legend>
-                    <div id="getCaptions" class="form-group collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="getCaption_id">
-                        <label for="">format:</label>
-                        <input type="text" class="form-control" id="getCaption_format">
-                        <button type="button" onclick="_getCaptions()" class="btn btn-primary">getCaptions()</button>
-                    </div>
-                    <legend data-target="#getCoverArt" data-toggle="collapse">getCoverArt<i class="fa fa-eye"></i></legend>
-                    <div id="getCoverArt" class="form-group collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="getCoverArt_id">
-                        <label for="">size:</label>
-                        <input type="text" class="form-control" id="getCoverArt_size">
-                        <button type="button" onclick="_getCoverArt()" class="btn btn-primary">getCoverArt()</button>
-                    </div>
-                    <legend data-target="#getLyrics" data-toggle="collapse">getLyrics<i class="fa fa-eye"></i></legend>
-                    <div id="getLyrics" class="form-group collapse">
-                        <label for="">artist:</label>
-                        <input type="text" class="form-control" id="getLyrics_artists">
-                        <label for="">title:</label>
-                        <input type="text" class="form-control" id="getLyrics_title">
-                        <button type="button" onclick="_getLyrics()" class="btn btn-primary">getLyrics()</button>
-                    </div>
-                    <legend data-target="#getAvatar" data-toggle="collapse">getAvatar<i class="fa fa-eye"></i></legend>
-                    <div id="getAvatar" class="form-group collapse">
-                        <label for="">username:</label>
-                        <input type="text" class="form-control" id="getAvatar_username">
-                        <button type="button" onclick="_getAvatar()" class="btn btn-primary">getAvatar()</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="well">
-                    <h2>MediaAnnotation<small>.js</small></h2>
-                    <legend data-target="#star" data-toggle="collapse">star<i class="fa fa-eye"></i></legend>
-                    <div id="star" class="form-group collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="star_id">
-                        <label for="">albumId:</label>
-                        <input type="text" class="form-control" id="star_albumId">
-                        <label for="">artistId:</label>
-                        <input type="text" class="form-control" id="star_artistId">
-                        <button type="button" onclick="_star()" class="btn btn-primary">star()</button>
-                    </div>
-                    <legend data-target="#unstar" data-toggle="collapse">unstar<i class="fa fa-eye"></i></legend>
-                    <div id="unstar" class="form-group collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="unstar_id">
-                        <label for="">albumId:</label>
-                        <input type="text" class="form-control" id="unstar_albumId">
-                        <label for="">artistId:</label>
-                        <input type="text" class="form-control" id="unstar_artistId">
-                        <button type="button" onclick="_unstar()" class="btn btn-primary">unstar()</button>
-                    </div>
-                    <legend data-target="#setRating" data-toggle="collapse">setRating<i class="fa fa-eye"></i></legend>
-                    <div id="setRating" class="form-group collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="setRating_id">
-                        <label for="">rating:</label>
-                        <input type="text" class="form-control" id="setRating_rating">
-                        <button type="button" onclick="_setRating()" class="btn btn-primary">setRating()</button>
-                    </div>
-                    <legend data-target="#scrobble" data-toggle="collapse">scrobble<i class="fa fa-eye"></i></legend>
-                    <div id="scrobble" class="form-group collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="scrobble_id">
-                        <label for="">time:</label>
-                        <input type="text" class="form-control" id="scrobble_time">
-                        <label for="">submission:</label>
-                        <input type="text" class="form-control" placeholder="default: true" id="scrobble_submission">
-                        <button type="button" onclick="_scrobble()" class="btn btn-primary">scrobble()</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <div class="well">
-                    <h2>Sharing<small>.js</small></h2>
-                    <legend data-target="#getShares" data-toggle="collapse">getShares<i class="fa fa-eye"></i></legend>
-                    <div id="getShares" class="collapse">
-                        <button type="button" onclick="_getShares()" class="btn btn-primary">getShares()</button>
-                    </div>
-                    <legend data-target="#createShare" data-toggle="collapse">createShare<i class="fa fa-eye"></i></legend>
-                    <div id="createShare" class="form-group collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="createShare_id">
-                        <label for="">description:</label>
-                        <input type="text" class="form-control" id="createShare_description">
-                        <label for="">expires:</label>
-                        <input type="text" class="form-control" id="createShare_expires">
-                        <button type="button" onclick="_createShare()" class="btn btn-primary">createShare()</button>
-                    </div>
-                    <legend data-target="#updateShare" data-toggle="collapse">updateShare<i class="fa fa-eye"></i></legend>
-                    <div id="updateShare" class="form-group collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="updateShare_id">
-                        <label for="">description:</label>
-                        <input type="text" class="form-control" id="updateShare_description">
-                        <label for="">expires:</label>
-                        <input type="text" class="form-control" id="updateShare_expires">
-                        <button type="button" onclick="_createShare()" class="btn btn-primary">createShare()</button>
-                    </div>
-                    <legend data-target="#deleteShare" data-toggle="collapse">deleteShare<i class="fa fa-eye"></i></legend>
-                    <div id="deleteShare" class="form-group collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="deleteShare_id">
-                        <button type="button" onclick="_deleteShare()" class="btn btn-primary">deleteShare()</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="well">
-                    <h2>Podcast<small>.js</small></h2>
-                    <legend data-target="#getPodcasts" data-toggle="collapse">getPodcasts <i class="fa fa-eye"></i></legend>
-                    <div id="getPodcasts" class="form-group collapse">
-                        <label for="">includeEpisodes:</label>
-                        <input type="text" class="form-control" id="getPodcasts_includeEpisodes">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="getPodcasts_id">
-                        <button type="button" onclick="_getPodcasts()" class="btn btn-primary">getPodcasts()</button>
-                    </div>
-                    <legend data-target="#getNewestPodcasts" data-toggle="collapse">getNewestPodcasts<i class="fa fa-eye"></i></legend>
-                    <div id="getNewestPodcasts" class="form-group collapse">
-                        <label for="">count:</label>
-                        <input type="text" class="form-control" id="getNewestPodcasts_count">
-                        <button type="button" onclick="_getNewestPodcasts()" class="btn btn-primary">getNewestPodcasts()</button>
-                    </div>
-                    <legend data-target="#refreshPodcasts" data-toggle="collapse">refreshPodcasts<i class="fa fa-eye"></i></legend>
-                    <div id="refreshPodcasts" class="collapse">
-                        <button type="button" onclick="_refreshPodcasts()" class="btn btn-primary">refreshPodcasts()</button>
-                    </div>
-                    <legend data-target="#createPodcastChannel" data-toggle="collapse">createPodcastChannel<i class="fa fa-eye"></i></legend>
-                    <div id="createPodcastChannel" class="form-group collapse">
-                        <label for="">url:</label>
-                        <input type="text" class="form-control" id="createPodcastChannel_url">
-                        <button type="button" onclick="_createPodcastChannel()" class="btn btn-primary">createPodcastChannel()</button>
-                    </div>
-                    <legend data-target="#deletePodcastChannel" data-toggle="collapse">deletePodcastChannel<i class="fa fa-eye"></i></legend>
-                    <div id="deletePodcastChannel" class="form-group collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="deletePodcastChannel_id">
-                        <button type="button" onclick="_deletePodcastChannel()" class="btn btn-primary">deletePodcastChannel()</button>
-                    </div>
-                    <legend data-target="#deletePodcastEpisode" data-toggle="collapse">deletePodcastEpisode<i class="fa fa-eye"></i></legend>
-                    <div id="deletePodcastEpisode" class="form-group collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="deletePodcastEpisode_id">
-                        <button type="button" onclick="_deletePodcastEpisode()" class="btn btn-primary">deletePodcastEpisode()</button>
-                    </div>
-                    <legend data-target="#downloadPodcastEpisode" data-toggle="collapse">downloadPodcastEpisode<i class="fa fa-eye"></i></legend>
-                    <div id="downloadPodcastEpisode" class="form-group collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="downloadPodcastEpisode_id">
-                        <button type="button" onclick="_downloadPodcastEpisode()" class="btn btn-primary">downloadPodcastEpisode()</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="well">
-                    <h2>Jukebox<small>.js</small></h2>
-                    <legend data-target="#jukeboxControl" data-toggle="collapse">jukeboxControl<i class="fa fa-eye"></i></legend>
-                    <div id="jukeboxControl" class="form-group collapse">
-                        <label for="">action:</label>
-                        <input type="text" class="form-control" id="jukeboxControl_action">
-                        <label for="">index:</label>
-                        <input type="text" class="form-control" id="jukeboxControl_index">
-                        <label for="">offset:</label>
-                        <input type="text" class="form-control" id="jukeboxControl_offset">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="jukeboxControl_id">
-                        <label for="">gain:</label>
-                        <input type="text" class="form-control" id="jukeboxControl_gain">
-                        <button type="button" onclick="_jukeboxControl()" class="btn btn-primary">jukeboxControl()</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="well">
-                    <h2>InternetRadio<small>.js</small></h2>
-                    <legend data-target="#getInternetRadioStations" data-toggle="collapse">getInternetRadioStations<i class="fa fa-eye"></i></legend>
-                    <div id="getInternetRadioStations" class="collapse">
-                        <button type="button" onclick="_getInternetRadioStations()" class="btn btn-primary">getInternetRadioStations()</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <div class="well">
-                    <h2>Chat<small>.js</small></h2>
-                    <legend data-target="#getChatMessages" data-toggle="collapse">getChatMessages<i class="fa fa-eye"></i></legend>
-                    <div id="getChatMessages" class="form-group collapse">
-                        <label for="">since:</label>
-                        <input type="text" class="form-control" id="getChatMessages_since">
-                        <button type="button" onclick="_getChatMessages()" class="btn btn-primary">getChatMessages()</button>
-                    </div>
-                    <legend data-target="#addChatMessage" data-toggle="collapse">addChatMessage<i class="fa fa-eye"></i></legend>
-                    <div id="addChatMessage" class="form-group collapse">
-                        <label for="">message:</label>
-                        <input type="text" class="form-control" id="addChatMessage_message">
-                        <button type="button" onclick="_addChatMessage()" class="btn btn-primary">addChatMessage()</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="well">
-                    <h2>UserManagement<small>.js</small></h2>
-                    <legend data-target="#getUser" data-toggle="collapse">getUser<i class="fa fa-eye"></i></legend>
-                    <div id="getUser" class="form-group collapse">
-                        <label for="">username:</label>
-                        <input type="text" class="form-control" id="getUser_username">
-                        <button type="button" onclick="_getUser()" class="btn btn-primary">getUser()</button>
-                    </div>
-                    <legend data-target="#getUsers" data-toggle="collapse">getUsers<i class="fa fa-eye"></i></legend>
-                    <div id="getUsers" class="collapse">
-                        <button type="button" onclick="_getUsers()" class="btn btn-primary">getUsers()</button>
-                    </div>
-                    <legend data-target="#createUser" data-toggle="collapse">createUser<i class="fa fa-eye"></i></legend>
-                    <div id="createUser" class="collapse">
-                        <label for="">username:</label>
-                        <input type="text" class="form-control" id="createUser_username">
-                        <label for="">password:</label>
-                        <input type="text" class="form-control" id="createUser_password">
-                        <label for="">email:</label>
-                        <input type="text" class="form-control" id="createUser_email">
-                        <label for="">ldapAuthenticated:</label>
-                        <input type="text" class="form-control" placeholder="default: false" id="createUser_ldapAuthenticated">
-                        <label for="">adminRole:</label>
-                        <input type="text" class="form-control" placeholder="default: false" id="createUser_adminRole">
-                        <label for="">settingsRole:</label>
-                        <input type="text" class="form-control" placeholder="default: true" id="createUser_settingsRole">
-                        <label for="">streamRole:</label>
-                        <input type="text" class="form-control" placeholder="default: true" id="createUser_streamRole">
-                        <label for="">jukeboxRole:</label>
-                        <input type="text" class="form-control" placeholder="default: false" id="createUser_jukeboxRole">
-                        <label for="">downloadRole:</label>
-                        <input type="text" class="form-control" placeholder="default: false" id="creatreUser_downloadRole">
-                        <label for="">uploadRole:</label>
-                        <input type="text" class="form-control" placeholder="default: false" id="createUser_uploadRole">
-                        <label for="">playlistRole:</label>
-                        <input type="text" class="form-control" placeholder="default: false" id="createUser_playlistRole">
-                        <label for="">coverArtRole:</label>
-                        <input type="text" class="form-control" placeholder="default: false" id="createUser_coverArtRole">
-                        <label for="">commentRole:</label>
-                        <input type="text" class="form-control" placeholder="default: false" id="createUser_commentRole">
-                        <label for="">podcastRole:</label>
-                        <input type="text" class="form-control" placeholder="default: false" id="createUser_podcastRole">
-                        <label for="">shareRole:</label>
-                        <input type="text" class="form-control" placeholder="default: false" id="createUser_shareRole">
-                        <label for="">videoConversionRole:</label>
-                        <input type="text" class="form-control" placeholder="default: false" id="creatreUser_videoConversionRole">
-                        <label for="">musicFolderId:</label>
-                        <input type="text" class="form-control" id="createUser_musicFolderId">
-                        <button type="button" onclick="_createUser()" class="btn btn-primary">createUser()</button>
-                    </div>
-                    <legend data-target="#updateUser" data-toggle="collapse">updateUser<i class="fa fa-eye"></i></legend>
-                    <div id="updateUser" class="form-group collapse">
-                        <label for="">username:</label>
-                        <input type="text" class="form-control" id="updateUser_username">
-                        <label for="">password:</label>
-                        <input type="text" class="form-control" id="updateUser_password">
-                        <label for="">email:</label>
-                        <input type="text" class="form-control" id="updateUser_email">
-                        <label for="">ldapAuthenticated:</label>
-                        <input type="text" class="form-control" placeholder="default: false" id="updateUser_ldapAuthenticated">
-                        <label for="">adminRole:</label>
-                        <input type="text" class="form-control" placeholder="default: false" id="updateUser_adminRole">
-                        <label for="">settingsRole:</label>
-                        <input type="text" class="form-control" placeholder="default: true" id="updateUser_settingsRole">
-                        <label for="">streamRole:</label>
-                        <input type="text" class="form-control" placeholder="default: true" id="updateUser_streamRole">
-                        <label for="">jukeboxRole:</label>
-                        <input type="text" class="form-control" placeholder="default: false" id="updateUser_jukeboxRole">
-                        <label for="">downloadRole:</label>
-                        <input type="text" class="form-control" placeholder="default: false" id="updateUser_downloadRole">
-                        <label for="">uploadRole:</label>
-                        <input type="text" class="form-control" placeholder="default: false" id="updateUser_uploadRole">
-                        <label for="">playlistRole:</label>
-                        <input type="text" class="form-control" placeholder="default: false" id="updateUser_playlistRole">
-                        <label for="">coverArtRole:</label>
-                        <input type="text" class="form-control" placeholder="default: false" id="updateUser_coverArtRole">
-                        <label for="">commentRole:</label>
-                        <input type="text" class="form-control" placeholder="default: false" id="updateUser_commentRole">
-                        <label for="">podcastRole:</label>
-                        <input type="text" class="form-control" placeholder="default: false" id="updateUser_podcastRole">
-                        <label for="">shareRole:</label>
-                        <input type="text" class="form-control" placeholder="default: false" id="updateUser_shareRole">
-                        <label for="">videoConversionRole:</label>
-                        <input type="text" class="form-control" placeholder="default: false" id="updateUser_videoConversionRole">
-                        <label for="">musicFolderId:</label>
-                        <input type="text" class="form-control" id="updateUser_musicFolderId">
-                        <label for="">maxBitRate:</label>
-                        <input type="text" class="form-control" id="updateUser_maxBitRate">
-                        <button type="button" onclick="_updateUser()" class="btn btn-primary">updateUser()</button>
-                    </div>
-                    <legend data-target="#deleteUser" data-toggle="collapse">deleteUser<i class="fa fa-eye"></i></legend>
-                    <div id="deleteUser" class="form-group collapse">
-                        <label for="">username:</label>
-                        <input type="text" class="form-control" id="deleteUser_username">
-                        <button type="button" onclick="_deleteUser()" class="btn btn-primary">deleteUser()</button>
-                    </div>
-                    <legend data-target="#changePassword" data-toggle="collapse">changePassword<i class="fa fa-eye"></i></legend>
-                    <div id="changePassword" class="form-group collapse">
-                        <label for="">username:</label>
-                        <input type="text" class="form-control" id="changePassword_username">
-                        <label for="">password:</label>
-                        <input type="text" class="form-control" id="changePassword_password">
-                        <button type="button" onclick="_changePassword()" class="btn btn-primary">changePassword()</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="well">
-                    <h2>Bookmarks<small>.js</small></h2>
-                    <legend data-target="#getBookmarks" data-toggle="collapse">getBookmarks<i class="fa fa-eye"></i></legend>
-                    <div id="getBookmarks" class="collapse">
-                        <button type="button" onclick="_getBookmarks()" class="btn btn-primary">getBookmarks()</button>
-                    </div>
-                    <legend data-target="#createBookmark" data-toggle="collapse">createBookmark<i class="fa fa-eye"></i></legend>
-                    <div id="createBookmark" class="form-group collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="createBookmark_id">
-                        <label for="">position:</label>
-                        <input type="text" class="form-control" id="createBookmark_position">
-                        <label for="">comment:</label>
-                        <input type="text" class="form-control" id="createBookmark_comment">
-                        <button type="button" onclick="_createBookmark()" class="btn btn-primary">createBookmark()</button>
-                    </div>
-                    <legend data-target="#deleteBookmark" data-toggle="collapse">deleteBookmark<i class="fa fa-eye"></i></legend>
-                    <div id="deleteBookmark" class="form-group collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="deleteBookmark_id">
-                        <button type="button" onclick="_deleteBookmark()" class="btn btn-primary">deleteBookmark()</button>
-                    </div>
-                    <legend data-target="#getPlayQueue" data-toggle="collapse">getPlayQueue<i class="fa fa-eye"></i></legend>
-                    <div id="getPlayQueue" class="collapse">
-                        <button type="button" onclick="_getPlayQueue()" class="btn btn-primary">getPlayQueue()</button>
-                    </div>
-                    <legend data-target="#savePlayQueue" data-toggle="collapse">savePlayQueue<i class="fa fa-eye"></i></legend>
-                    <div id="savePlayQueue" class="form-group collapse">
-                        <label for="">id:</label>
-                        <input type="text" class="form-control" id="savePlayQueue_id">
-                        <label for="">current:</label>
-                        <input type="text" class="form-control" id="savePlayQueue_current">
-                        <label for="">position:</label>
-                        <input type="text" class="form-control" id="savePlayQueue_position">
-                        <button type="button" onclick="_savePlayQueue()" class="btn btn-primary">savePlayQueue()</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="well">
-                    <h2>MediaScanning<small>.js</small></h2>
-                    <legend data-target="#getScanStatus" data-toggle="collapse">getScanStatus<i class="fa fa-eye"></i></legend>
-                    <div id="getScanStatus" class="collapse">
-                        <button type="button" onclick="_getScanStatus()" class="btn btn-primary">getScanStatus()</button>
-                    </div>
-                    <legend data-target="#startScan" data-toggle="collapse">startScan<i class="fa fa-eye"></i></legend>
-                    <div id="startScan" class="collapse">
-                        <button type="button" onclick="_startScan()" class="btn btn-primary">startScan()</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="http://use.edgefonts.net/doppio-one:n4:all;droid-sans-mono:n4:all;monoton:n4:all;montserrat:n4:all;ubuntu-mono:n7,i7,n4,i4:all.js"></script>
-    <script src="js/md5.js"></script>
-    <script src="js/Album.js"></script>
-    <script src="js/Authenticate.js"></script>
-    <script src="js/Bookmarks.js"></script>
-    <script src="js/Browsing.js"></script>
-    <script src="js/Chat.js"></script>
-    <script src="js/InternetRadio.js"></script>
-    <script src="js/Jukebox.js"></script>
-    <script src="js/MediaAnnotation.js"></script>
-    <script src="js/MediaRetrieval.js"></script>
-    <script src="js/MediaScanning.js"></script>
-    <script src="js/Playlists.js"></script>
-    <script src="js/Podcast.js"></script>
-    <script src="js/Searching.js"></script>
-    <script src="js/Sharing.js"></script>
-    <script src="js/System.js"></script>
-    <script src="js/UserManagement.js"></script>
-    <script>
-        /* FIXME Auths */
-        $('document').ready(loadForm());
-        var items = [
-            "loginUrl", "loginUsername", "loginPassword", "loginRestVersion", "loginAppName"
-        ];
-        var ids = [
-            "login_url", "login_username", "login_password", "login_rest_version", "login_app_name"
-        ];
-        var auth = new Authenticate(localStorage.getItem(items[0]), localStorage.getItem(items[1]), localStorage.getItem(items[2]), localStorage.getItem(items[3]), localStorage.getItem(items[4]), localStorage.getItem(items[5]));
-
-        function log(result) {
-            console.log(result);
-            document.getElementById("console_text").innerHTML = "<xmp>" + result + "</xmp>";
-        }
-
-        function getForm(id) {
-            return document.getElementById(id).value;
-        }
-
-        function setForm(id, value) {
-            document.getElementById(id).value = value;
-        }
-
-        function saveForm() {
-            var items = [
-                "loginUrl", "loginUsername", "loginPassword", "loginRestVersion", "loginAppName"
-            ];
-            var ids = [
-                "login_url", "login_username", "login_password", "login_rest_version", "login_app_name"
-            ];
-            for (var i = 0; i < items.length; i++) {
-                localStorage.setItem(items[i], getForm(ids[i]));
-            }
-            alert("Login Settings Saved!");
-        }
-
-        function loadForm() {
-            var items = [
-                "loginUrl", "loginUsername", "loginPassword", "loginRestVersion", "loginAppName"
-            ];
-            var ids = [
-                "login_url", "login_username", "login_password", "login_rest_version", "login_app_name"
-            ];
-            for (var i = 0; i < items.length; i++) {
-                setForm(ids[i], localStorage.getItem(items[i]));
-            }
-        }
-
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        /*
-         *	Album.js Implmentation
-         */
-
-        function _getAlbumList() {
-            var type = getForm("getAlbumList_type");
-            var size = getForm("getAlbumList_size");
-            var offset = getForm("getAlbumList_offset");
-            var fromYear = getForm("getAlbumList_fromYear");
-            var toYear = getForm("getAlbumList_toYear");
-            var genre = getForm("getAlbumList_genre");
-            var musicFolderId = getForm("getAlbumList_musicFolderId");
-            getAlbumList(auth, type, size, offset, fromYear, toYear, genre, musicFolderId, function() {
-                log(this);
-            });
-        }
-
-        function _getAlbumList2() {
-            var type = getForm("getAlbumList2_type");
-            var size = getForm("getAlbumList2_size");
-            var offset = getForm("getAlbumList2_offset");
-            var fromYear = getForm("getAlbumList2_fromYear");
-            var toYear = getForm("getAlbumList2_toYear");
-            var genre = getForm("getAlbumList2_genre");
-            var musicFolderId = getForm("getAlbumList2_musicFolderId");
-            getAlbumList2(auth, type, size, offset, fromYear, toYear, genre, musicFolderId, function() {
-                log(this);
-            });
-        }
-
-        function _getRandomSongs() {
-            var size = getForm("getRandomSongs_size");
-            var genre = getForm("getRandomSongs_genre");
-            var fromYear = getForm("getRandomSongs_fromYear");
-            var toYear = getForm("getRandomSongs_toYear");
-            var musicFolderId = getForm("getRandomSongs_musicFolderId");
-            getRandomSongs(auth, size, genre, fromYear, toYear, musicFolderId, function() {
-                log(this);
-            });
-        }
-
-        function _getSongsByGenre() {
-            var genre = getForm("getSongsByGenre_genre");
-            var count = getForm("getSongsByGenre_count");
-            var offset = getForm("getSongsByGenre_offset");
-            var musicFolderId = getForm("getSongsByGenre_musicFolderId");
-            getSongsByGenre(auth, genre, count, offset, musicFolderId, function() {
-                log(this);
-            });
-        }
-
-        function _getNowPlaying() {
-            getNowPlaying(auth, function() {
-                log(this);
-            });
-        }
-
-        function _getStarred() {
-            var musicFolderId = getForm("getStarred_musicFolderId");
-            getStarred(auth, musicFolderId, function() {
-                log(this);
-            });
-        }
-
-        function _getStarred2() {
-            var musicFolderId = getForm("getStarred2_musicFolderId");
-            getStarred2(auth, musicFolderId, function() {
-                log(this);
-            });
-        }
-
-        /*
-         *	Authtenticate.js Implementation
-         */
-
-        function _salt() {
-            var result = auth.generateSalt();
-            log(result);
-        }
-
-        function _token() {
-            var result = auth.generateToken(auth.generateSalt());
-            log(result);
-        }
-
-        function _apiCall() {
-            var result = auth.generateApiCall("ping", "");
-            log(result);
-        }
-
-        /*
-         *	Bookmarks.js Implementation
-         */
-
-        function _getBookmarks() {
-            getBookmarks(auth, function() {
-                log(this);
-            });
-        }
-
-        function _createBookmark() {
-            var id = getForm("createBookmark_id");
-            var position = getForm("createBookmark_position");
-            var comment = getForm("createUser_comment");
-            createBookmark(auth, id, position, comment, function() {
-                log(this);
-            });
-        }
-
-        function _deleteBookmark() {
-            var id = getForm("deleteBookmark_id");
-            deleteBookmark(auth, id, function() {
-                log(this);
-            });
-        }
-
-        function _getPlayQueue() {
-            getPlayQueue(auth, function() {
-                log(this);
-            });
-        }
-
-        function _savePlayQueue() {
-            var id = getForm("savePlayQueue_id");
-            var current = getForm("savePlayQueue_current");
-            var position = getForm("savePlayQueue_position");
-            savePlayQueue(auth, id, current, position, function() {
-                log(this);
-            });
-        }
-
-        /*
-         *	Browsing.js Implementation
-         */
-
-        function _getMusicFolders() {
-            getMusicFolders(auth, function() {
-                log(this);
-            });
-        }
-
-        function _getIndexes() {
-            var musicFolderId = getForm("getIndexes_musicFolderId");
-            var ifModifiedSince = getForm("getIndexes_ifModifiedSince");
-            console.log(musicFolderId);
-            getIndexes(auth, musicFolderId, ifModifiedSince, function() {
-                log(this);
-            });
-        }
-
-        function _getMusicDirectory() {
-            var id = getForm("getMusicDirectory_id");
-            getMusicDirectory(auth, id, function() {
-                log(this);
-            });
-        }
-
-        function _getGenres() {
-            getGenres(auth, function() {
-                log(this);
-            });
-        }
-
-        function _getArtists() {
-            var musicFolderId = getForm("getArtists_musicFolderId");
-            getArtists(auth, musicFolderId, function() {
-                log(this);
-            });
-        }
-
-        function _getArtist() {
-            var id = getForm("getArtist_id");
-            getArtist(auth, id, function() {
-                log(this);
-            });
-        }
-
-        function _getAlbum() {
-            var id = getForm("getAlbum_id");
-            getAlbum(auth, id, function() {
-                log(this);
-            });
-        }
-
-        function _getSong() {
-            var id = getForm("getSong_id");
-            getSong(auth, id, function() {
-                log(this);
-            });
-        }
-
-        function _getVideos() {
-            getVideos(auth, function() {
-                log(this);
-            });
-        }
-
-        function _getVideoInfo() {
-            var id = getForm("getVideoInfo_id");
-            getVideoInfo(auth, id, function() {
-                log(this);
-            });
-        }
-
-        function _getArtistInfo() {
-            var id = getForm("getArtistInfo_id");
-            var count = getForm("getArtistInfo_count");
-            var includeNotPresent = getForm("getArtistInfo_includeNotPresent");
-            getArtistInfo(auth, id, count, includeNotPresent, function() {
-                log(this);
-            });
-        }
-
-        function _getArtistInfo2() {
-            var id = getForm("getArtistInfo2_id");
-            var count = getForm("getArtistInfo2_count");
-            var includeNotPresent = getForm("getArtistInfo2_includeNotPresent");
-            getArtistInfo2(auth, id, count, includeNotPresent, function() {
-                log(this);
-            });
-        }
-
-        function _getAlbumInfo() {
-            var id = getForm("getAlbumInfo_id");
-            getAlbumInfo(auth, id, function() {
-                log(this);
-            });
-        }
-
-        function _getAlbumInfo2() {
-            var id = getForm("getAlbumInfo2_id");
-            getAlbumInfo2(auth, id, function() {
-                log(this);
-            });
-        }
-
-        function _getSimilarSongs() {
-            var id = getForm("getSimilarSongs_id");
-            var count = getForm("getSimilarSongs_count");
-            getSimilarSongs(auth, id, count, function() {
-                log(this);
-            });
-        }
-
-        function _getSimilarSongs2() {
-            var id = getForm("getSimilarSongs2_id");
-            var count = getForm("getSimilarSongs2_count");
-            getSimilarSongs2(auth, id, count, function() {
-                log(this);
-            });
-        }
-
-        function _getTopSongs() {
-            var artist = getForm("getTopSongs_artist");
-            var count = getForm("getTopSongs_count");
-            getTopSongs(auth, artist, count, function() {
-                log(this);
-            });
-        }
-
-        /*
-         *	Chat.js  Implementation
-         */
-
-        function _getChatMessages() {
-            var since = getForm("getChatMessages_since");
-            getChatMessages(auth, since, function() {
-                log(this);
-            });
-        }
-
-        function _addChatMessage() {
-            var message = getForm("addChatMessage_message");
-            addChatMessage(auth, message, function() {
-                log(this);
-            });
-        }
-
-        /*
-         *	InternetRadio.js Implementation
-         */
-
-        function _getInternetRadioStations() {
-            getInternetRadioStations(auth, function() {
-                log(this);
-            });
-        }
-
-        /*
-         *	Jukebox.js Implementation
-         */
-
-        function _jukeboxControl() {
-            var action = getForm("jukeboxControl_action");
-            var index = getForm("jukeboxControl_index");
-            var offset = getForm("jukeboxControl_offset");
-            var id = getForm("jukeboxControl_id");
-            var gain = getForm("jukeboxControl_gain");
-            jukeboxControl(auth, action, index, offset, id, gain, function() {
-                log(this);
-            });
-        }
-
-        /*
-         *	MediaAnnotation.js Implementation
-         */
-
-        function _star() {
-            var id = getForm("star_id");
-            var albumId = getForm("star_albumId");
-            var artistId = getForm("star_artistId");
-            star(auth, id, albumId, artistId, function() {
-                log(this);
-            });
-        }
-
-        function _unstar() {
-            var id = getForm("unstar_id");
-            var albumId = getForm("unstar_albumId");
-            var artistId = getForm("unstar_artistId");
-            unstar(auth, id, albumId, artistId, function() {
-                log(this);
-            });
-        }
-
-        function _setRating() {
-            var id = getForm("setRating_id");
-            var rating = getForm("setRating_rating");
-            setRating(auth, id, rating, function() {
-                log(this);
-            });
-        }
-
-        function _scrobble() {
-            var id = getForm("scrobble_id");
-            var time = getForm("scrobble_time");
-            var submission = getForm("scrobble_submission");
-            scrobble(auth, id, time, submission, function() {
-                log(this);
-            });
-        }
-
-        /*
-         *	MediaRetrieval.js Implementation
-         */
-
-        function _stream() {
-            var id = getForm("stream_id");
-            var maxBitRate = getForm("stream_maxBitRate");
-            var format = getForm("stream_format");
-            var timeOffset = getForm("stream_timeOffset");
-            var size = getForm("stream_size");
-            var estimateContentLength = getForm("stream_estimateContentLength");
-            var converted = getForm("stream_converted");
-            stream(auth, id, maxBitRate, format, timeOffset, size, estimateContentLength, converted, function() {
-                log(this);
-            });
-        }
-
-        function _download() {
-            var id = getForm("download_id");
-            download(auth, id, function() {
-                log(this);
-            });
-        }
-
-        function _hls() {
-            var id = getForm("hls_id");
-            var bitRate = getForm("hls_bitRate");
-            var audioTrack = getForm("hls_audioTrack");
-            hls(auth, id, bitRate, audioTrack, function() {
-                log(this);
-            });
-        }
-
-        function _getCaptions() {
-            var id = getForm("getCaptions_id");
-            var format = getForm("getCaptions_format");
-            getCaptions(auth, id, format, function() {
-                log(this);
-            });
-        }
-
-        function _getCoverArt() {
-            var id = getForm("getCaptions_id");
-            var size = getForm("getCaptions_size");
-            getCoverArt(auth, id, size, function() {
-                log(this);
-            });
-        }
-
-        function _getLyrics() {
-            var artist = getForm("getLyrics_artist");
-            var title = getForm("getLyrics_title");
-            getLyrics(auth, artist, title, function() {
-                log(this);
-            });
-        }
-
-        function _getAvatar() {
-            var username = getForm("getAvatar_username");
-            getAvatar(auth, username, function() {
-                log(this);
-            });
-        }
-
-        /*
-         *	MediaScanning.js Implementation
-         */
-
-        function _getScanStatus() {
-            getScanStatus(auth, function() {
-                log(this);
-            });
-        }
-
-        function _startScan() {
-            startScan(auth, function() {
-                log(this);
-            });
-        }
-
-        /*
-         *	Playlists.js Implementation
-         */
-
-        function _getPlaylists() {
-            var username = getForm("getPlaylists_username");
-            getPlaylists(auth, username, function() {
-                log(this);
-            });
-        }
-
-        function _getPlaylist() {
-            var id = getForm("getPlaylist_id");
-            getPlaylist(auth, id, function() {
-                log(this);
-            });
-        }
-
-        function _createPlaylist() {
-            var playlistId = getForm("createPlaylist_playlistId");
-            var name = getForm("createPlaylist_name");
-            var songId = getForm("createPlaylist_songId");
-            createPlaylist(auth, playlistId, name, songId, function() {
-                log(this);
-            });
-        }
-
-        function _updatePlaylist() {
-            var playlistId = getForm("updatePlaylist_playlistId");
-            var name = getForm("updatePlaylist_name");
-            var comment = getForm("updatePlaylist_comment");
-            var publicPlaylist = getForm("updatePlaylist_publicPlaylist");
-            var songIdToAdd = getForm("updatePlaylist_songIdToAdd");
-            var songIndexToRemoved = getForm("updatePlaylist_songIndexToRemove");
-            updatePlaylist(auth, playlistId, name, comment, publicPlaylist, songIdToAdd, songIndexToRemoved, function() {
-                log(this);
-            });
-        }
-
-        function _deletePlaylist() {
-            var id = getForm("deletePlaylist_id");
-            deletePlaylist(auth, id, function() {
-                log(this);
-            });
-        }
-
-        /*
-         *	Podcast.js Implementation
-         */
-
-        function _getPodcasts() {
-            var includeEpisodes = getForm("getPodcasts_includeEpisodes");
-            var id = getForm("getPodcasts_id");
-            getPodcasts(auth, includeEpisodes, id, function() {
-                log(this);
-            });
-        }
-
-        function _getNewestPodcasts() {
-            var count = getForm("getNewestPodcasts_count");
-            getNewestPodcasts(auth, count, function() {
-                log(this);
-            });
-        }
-
-        function _refreshPodcasts() {
-            refreshPodcasts(auth, function() {
-                log(this);
-            });
-        }
-
-        function _createPodcastChannel() {
-            var url = getForm("createPodcastChannel_url");
-            createPodcastChannel(auth, url, function() {
-                log(this);
-            });
-        }
-
-        function _deletePodcastChannel() {
-            var id = getForm("deletePodcastChannel_id");
-            deletePodcastChannel(auth, id, function() {
-                log(this);
-            });
-        }
-
-        function _deletePodcastEpisode() {
-            var id = getForm("deletePodcastEpisode_id");
-            deletePodcastEpisode(auth, id, function() {
-                log(this);
-            });
-        }
-
-        function _downloadPodcastEpisode() {
-            var id = getForm("downloadPodcastEpisode_id");
-            downloadPodcastEpisode(auth, id, function() {
-                log(this);
-            });
-        }
-
-        /*
-         *	Searching.js Implementation
-         */
-
-        function _search() {
-            var artist = getForm("search_artist");
-            var album = getForm("search_album");
-            var title = getForm("search_title");
-            var any = getForm("search_any");
-            var count = getForm("search_count");
-            var offset = getForm("search_offset");
-            var newerThan = getForm("search_newerThan");
-            search(auth, album, artist, title, any, count, offset, newerThan, function() {
-                log(this);
-            });
-        }
-
-        function _search2() {
-            var query = getForm("search2_query");
-            var artistCount = getForm("search2_artistCount");
-            var artistOffset = getForm("search2_artistOffset");
-            var albumCount = getForm("search2_albumCount");
-            var albumOffset = getForm("search2_albumOffset");
-            var songCount = getForm("search2_songCount");
-            var songOffset = getForm("search2_songOffset");
-            var musicFolderId = getForm("search2_musicFolderId");
-            search2(auth, query, artistCount, artistOffset, albumCount, albumOffset, songCount, songOffset, musicFolderId, function() {
-                log(this);
-            });
-        }
-
-        function _search3() {
-            var query = getForm("search3_query");
-            var artistCount = getForm("search3_artistCount");
-            var artistOffset = getForm("search3_artistOffset");
-            var albumCount = getForm("search3_albumCount");
-            var albumOffset = getForm("search3_albumOffset");
-            var songCount = getForm("search3_songCount");
-            var songOffset = getForm("search3_songOffset");
-            var musicFolderId = getForm("search3_musicFolderId");
-            search3(auth, query, artistCount, artistOffset, albumCount, albumOffset, songCount, songOffset, musicFolderId, function() {
-                log(this);
-            });
-        }
-
-        /*
-         *	Sharing.js Implementation
-         */
-
-        function _getShares() {
-            getShares(auth, function() {
-                log(this);
-            });
-        }
-
-        function _createShare() {
-            var id = getForm("createShare_id");
-            var description = getForm("createShare_description");
-            var expires = getForm("createShare_expires");
-            createShare(auth, id, description, expires, function() {
-                log(this);
-            });
-        }
-
-        function _updateShare() {
-            var id = getForm("updateShare_id");
-            var description = getForm("updateShare_description");
-            var expires = getForm("updateShare_expires");
-            updateShare(auth, id, description, expires, function() {
-                log(this);
-            });
-        }
-
-        function _deleteShare() {
-            var id = getForm("deleteShare_id");
-            deleteShare(auth, id, function() {
-                log(this);
-            });
-        }
-
-        /*
-         *	System.js Implementation
-         */
-
-        function _ping() {
-            ping(auth, function() {
-                log(this);
-            });
-        }
-
-        function _getLicense() {
-            getLicense(auth, function() {
-                log(this);
-            });
-        }
-
-        /*
-         *	UserManagement.js Implementation
-         */
-
-        function _getUser() {
-            var username = getForm("getUser_username");
-            getUser(auth, username, function() {
-                log(this);
-            });
-        }
-
-        function _getUsers() {
-            getUsers(auth, function() {
-                log(this);
-            });
-        }
-
-        function _createUser() {
-            var username = getForm("createUser_username");
-            var password = getForm("createUser_password");
-            var email = getForm("createUser_email");
-            var ldapAuthenticated = getForm("createUser_ldapAuthenticated");
-            var adminRole = getForm("createUser_adminRole");
-            var settingsRole = getForm("createUser_settingsRole");
-            var streamRole = getForm("createUser_streamRole");
-            var jukeboxRole = getForm("createUser_jukeboxRole");
-            var downloadRole = getForm("createUser_downloadRole");
-            var uploadRole = getForm("createUser_uploadRole");
-            var playlistRole = getForm("createUser_playlistRole");
-            var coverArtRole = getForm("createUser_coverArtRole");
-            var commentRole = getForm("createUser_commentRole");
-            var podcastRole = getForm("createUser_podcastRole");
-            var shareRole = getForm("createUser_shareRole");
-            var videoConversionRole = getForm("createUser_videoConversionRole");
-            var musicFolderId = getForm("createUser_musicFolderId");
-            createUser(auth, username, password, email, ldapAuthenticated, adminRole, settingsRole, streamRole, jukeboxRole, downloadRole, uploadRole, playlistRole, coverArtRole, commentRole, podcastRole, shareRole, videoConversionRole, musicFolderId, function() {
-                log(this);
-            });
-        }
-
-        function _updateUser() {
-            var username = getForm("updateUser_username");
-            var password = getForm("updateUser_password");
-            var email = getForm("updateUser_email");
-            var ldapAuthenticated = getForm("updateUser_ldapAuthenticated");
-            var adminRole = getForm("updateUser_adminRole");
-            var settingsRole = getForm("updateUser_settingsRole");
-            var streamRole = getForm("updateUser_streamRole");
-            var jukeboxRole = getForm("updateUser_jukeboxRole");
-            var downloadRole = getForm("updateUser_downloadRole");
-            var uploadRole = getForm("updateUser_uploadRole");
-            var playlistRole = getForm("updateUser_playlistRole");
-            var coverArtRole = getForm("updateUser_coverArtRole");
-            var commentRole = getForm("updateUser_commentRole");
-            var podcastRole = getForm("updateUser_podcastRole");
-            var shareRole = getForm("updateUser_shareRole");
-            var videoConversionRole = getForm("updateUser_videoConversionRole");
-            var musicFolderId = getForm("updateUser_musicFolderId");
-            var maxBitRate = getForm("updateUser_maxBitRate");
-            updateUser(auth, username, password, email, ldapAuthenticated, adminRole, settingsRole, streamRole, jukeboxRole, downloadRole, uploadRole, playlistRole, coverArtRole, commentRole, podcastRole, shareRole, videoConversionRole, musicFolderId, maxBitRate, function() {
-                log(this);
-            });
-        }
-
-        function _deleteUser() {
-            var username = getForm("deleteUser_username");
-            deleteUser(auth, username, function() {
-                log(this);
-            });
-        }
-
-        function _changePassword() {
-            var username = getForm("changePassword_username");
-            var password = getForm("changePassword_password");
-            changePassword(auth, username, password, function() {
-                log(this);
-            });
-        }
-
-    </script>
+	<div class="jumbotron">
+		<h1><i class="fa fa-cube"></i> subDJ <i class="fa fa-music"></i></h1>
+		<p>Test control panel for the Javascript Subsonic API.</p>
+	</div>
+	<div id="nav" class="jumbotron">
+		<div class="container">
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<a href="#authenticate">Authenticate</a><br>
+				<a href="#searching">Searching</a><br>
+				<a href="#sharing">Sharing</a><br>
+				<a href="#chat">Chat</a><br>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<a href="#system">System</a><br>
+				<a href="#playlists">Playlists</a><br>
+				<a href="#podcast">Podcast</a><br>
+				<a href="#usermanagement">User Management</a><br>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<a href="#browsing">Browsing</a><br>
+				<a href="#mediaretrieval">Media Retrieval</a><br>
+				<a href="#jukebox">Jukebox</a><br>
+				<a href="#bookmarks">Bookmarks</a><br>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<a href="#album">Album</a><br>
+				<a href="#mediaannotation">Media Annotation</a><br>
+				<a href="#internetradio">Internet Radio</a><br>
+				<a href="#mediascanning">Media Scanning</a><br>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<div id="musicplayer" class="well">
+					<audio id="player_audio" controls autoplay><source id="player_source" src="" type="audio/mpeg"></audio>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-md-4 col-lg-4">
+				<div id="login" class="well">
+					<form action="" method="POST" role="form">
+						<!-- TODO Implement Login Form -->
+						<legend>Subsonic Login Credentials</legend>
+						<div class="form-group">
+							<label for="">Server URL:</label>
+							<input type="text" class="form-control" id="login_url" placeholder="http://zobris.duckdns.org:4040">
+						</div>
+						<div class="form-group">
+							<label for="">Subsonic Username:</label>
+							<input type="text" class="form-control" id="login_username" placeholder="test">
+						</div>
+						<div class="form-group">
+							<label for="">Subsonic Password:</label>
+							<input type="password" class="form-control" id="login_password" placeholder="123">
+						</div>
+						<div class="form-group">
+							<label for="">REST Version:</label>
+							<input type="text" class="form-control" id="login_rest_version" placeholder="1.14.0">
+						</div>
+						<div class="form-group">
+							<label for="">App Name:</label>
+							<input type="text" class="form-control" id="login_app_name" placeholder="subDJ">
+						</div>
+						<button type="button" onclick="saveForm()" class="btn btn-primary">Save</button>
+					</form>
+				</div>
+			</div>
+			<div class="col-sm-8 col-md-8 col-lg-8">
+				<div id="console" class="well well-lg">
+					<h1><i class="fa fa-desktop"></i> Output <i class="fa fa-angle-double-right"></i>
+					</h1>
+					<p id="console_text">subDJ.html:64 d3uekc
+						<br>subDJ.html:65 ba3d7d7b43198542489f487a269229d9
+						<br>subDJ.html:66 http://zobris.duckdns.org:4040/rest/getLicense.view?u=test&t=102ede419a22e6286fcab0ac18d3739c&s=bnrdop&v=1.14.0&c=subDJ</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3">
+				<div id="authenticate" class="well">
+					<h2>Authenticate<small>.js</small></h2>
+					<legend data-target="#salt" data-toggle="collapse">salt <i class="fa fa-eye"></i></legend>
+					<div id="salt" class="collapse">
+						<button onclick="_salt()" type="button" class="btn btn-primary">generateSalt()</button>
+					</div>
+					<legend data-target="#token" data-toggle="collapse">token <i class="fa fa-eye"></i></legend>
+					<div id="token" class="collapse">
+						<button onclick="_token()" type="button" class="btn btn-primary">generateToken()</button>
+					</div>
+					<legend data-target="#apiCall" data-toggle="collapse">apiCall <i class="fa fa-eye"></i></legend>
+					<div id="apiCall" class="collapse">
+						<button onclick="_apiCall()" type="button" class="btn btn-primary">generateApiCall()</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div id="system" class="well">
+					<h2>System<small>.js</small></h2>
+					<legend data-target="#ping" data-toggle="collapse">ping <i class="fa fa-eye"></i></legend>
+					<div id="ping" class="collapse">
+						<button type="button" onclick="_ping()" class="btn btn-primary">ping()</button>
+					</div>
+					<legend data-target="#getLicense" data-toggle="collapse">getLicense <i class="fa fa-eye"></i></legend>
+					<div id="getLicense" class="collapse">
+						<button type="button" onclick="_getLicense()" class="btn btn-primary">getLicense()</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div id="browsing" class="well">
+					<h2>Browsing<small>.js</small></h2>
+					<legend data-target="#getMusicFolders" data-toggle="collapse">getMusicFolders<i class="fa fa-eye"></i></legend>
+					<div id="getMusicFolders" class="collapse">
+						<button type="button" onclick="_getMusicFolders()" class="btn btn-primary">getMusicFolders()</button>
+					</div>
+					<legend data-target="#getIndexes" data-toggle="collapse">getIndexes <i class="fa fa-eye"></i></legend>
+					<div id="getIndexes" class="form-group collapse">
+						<label for="">musicFolderId:</label>
+						<input type="text" class="form-control" id="getIndexes_musicFolderId">
+						<label for="">ifModifiedSince:</label>
+						<input type="text" class="form-control" id="getIndexes_ifModifiedSince">
+						<button type="button" onclick="_getIndexes()" class="btn btn-primary">getIndexes()</button>
+					</div>
+					<legend data-target="#getMusicDirectory" data-toggle="collapse">getMusicDirectory <i class="fa fa-eye"></i></legend>
+					<div id="getMusicDirectory" class="form-group collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="getMusicDirectory_id">
+						<button type="button" onclick="_getMusicDirectory()" class="btn btn-primary">getMusicDirectory()</button>
+					</div>
+					<legend data-target="#getGenres" data-toggle="collapse">getGenres <i class="fa fa-eye"></i></legend>
+					<div id="getGenres" class="collapse">
+						<button type="button" onclick="_getGenres()" class="btn btn-primary">getGenres()</button>
+					</div>
+					<legend data-target="#getArtists" data-toggle="collapse">getArtists <i class="fa fa-eye"></i></legend>
+					<div id="getArtists" class="form-group collapse">
+						<label>musicFolderId:</label>
+						<input type="text" class="form-control" id="getArtists_musicFolderId">
+						<button type="button" onclick="_getArtists()" class="btn btn-primary">getArtists()</button>
+					</div>
+					<legend data-target="#getArtist" data-toggle="collapse">getArtist <i class="fa fa-eye"></i></legend>
+					<div id="getArtist" class="form-group collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="getArtist_id">
+						<button type="button" onclick="_getArtist()" class="btn btn-primary">getArtist()</button>
+					</div>
+					<legend data-target="#getAlbum" data-toggle="collapse">getAlbum <i class="fa fa-eye"></i></legend>
+					<div id="getAlbum" class="form-group collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="getAlbum_id">
+						<button type="button" onclick="_getAlbum()" class="btn btn-primary">getAlbum()</button>
+					</div>
+					<legend data-target="#getSong" data-toggle="collapse">getSong <i class="fa fa-eye"></i></legend>
+					<div id="getSong" class="form-group collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="getSong_id">
+						<button type="button" onclick="_getSong()" class="btn btn-primary">getSong()</button>
+					</div>
+					<legend data-target="#getVideos" data-toggle="collapse">getVideos <i class="fa fa-eye"></i></legend>
+					<div id="getVideos" class="collapse">
+						<button type="button" onclick="_getVideos()" class="btn btn-primary">getVideos()</button>
+					</div>
+					<legend data-target="#getVideoInfo" data-toggle="collapse">getVideoInfo <i class="fa fa-eye"></i></legend>
+					<div id="getVideoInfo" class="collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="getVideoInfo_id">
+						<button type="button" onclick="_getVideoInfo()" class="btn btn-primary">getVideoInfo()</button>
+					</div>
+					<legend data-target="#getArtistInfo" data-toggle="collapse">getArtistInfo <i class="fa fa-eye"></i></legend>
+					<div id="getArtistInfo" class="form-group collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="getArtistInfo_id">
+						<label for="">count:</label>
+						<input type="text" class="form-control" placeholder="default: 20" id="getArtistInfo_count">
+						<label for="">includeNotPresent:</label>
+						<input type="text" class="form-control" placeholder="default: false" id="getArtistInfo_includeNotPresent">
+						<button type="button" onclick="_getArtistInfo()" class="btn btn-primary">getArtistInfo()</button>
+					</div>
+					<legend data-target="#getArtistInfo2" data-toggle="collapse">getArtistInfo2 <i class="fa fa-eye"></i></legend>
+					<div id="getArtistInfo2" class="form-group collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="getArtistInfo2_id">
+						<label for="">count:</label>
+						<input type="text" class="form-control" placeholder="default: 20" id="getArtistInfo2_count">
+						<label for="">includeNotPresent:</label>
+						<input type="text" class="form-control" placeholder="default: false" id="getArtistInfo2_includeNotPresent">
+						<button type="button" onclick="_getArtistInfo2()" class="btn btn-primary">getArtistInfo2()</button>
+					</div>
+					<legend data-target="#getAlbumInfo" data-toggle="collapse">getAlbumInfo <i class="fa fa-eye"></i></legend>
+					<div id="getAlbumInfo" class="collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="getAlbumInfo_id">
+						<button type="button" onclick="_getAlbumInfo()" class="btn btn-primary">getAlbumInfo()</button>
+					</div>
+					<legend data-target="#getAlbumInfo2" data-toggle="collapse">getAlbumInfo2 <i class="fa fa-eye"></i></legend>
+					<div id="getAlbumInfo2" class="collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="getAlbumInfo2_id">
+						<button type="button" onclick="_getAlbumInfo2()" class="btn btn-primary">getAlbumInfo2()</button>
+					</div>
+					<legend data-target="#getSimilarSongs" data-toggle="collapse">getSimilarSongs <i class="fa fa-eye"></i></legend>
+					<div id="getSimilarSongs" class="form-group collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="getSimilarSongs_id">
+						<label for="">count:</label>
+						<input type="text" class="form-control" placeholder="defaut: 50" id="getSimilarSongs_count">
+						<button type="button" onclick="_getSimilarSongs()" class="btn btn-primary">getSimilarSongs()</button>
+					</div>
+					<legend data-target="#getSimilarSongs2" data-toggle="collapse">getSimilarSongs2 <i class="fa fa-eye"></i></legend>
+					<div id="getSimilarSongs2" class="form-group collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="getSimilarSongs2_id">
+						<label for="">count:</label>
+						<input type="text" class="form-control" placeholder="defaut: 50" id="getSimilarSongs2_count">
+						<button type="button" onclick="_getSimilarSongs2()" class="btn btn-primary">getSimilarSongs2()</button>
+					</div>
+					<legend data-target="#getTopSongs" data-toggle="collapse">getTopSongs <i class="fa fa-eye"></i></legend>
+					<div id="getTopSongs" class="form-group collapse">
+						<label for="">artist:</label>
+						<input type="text" class="form-control" id="getTopSongs_artist">
+						<label for="">count:</label>
+						<input type="text" class="form-control" placeholder="defaut: 50" id="getTopSongs_count">
+						<button type="button" onclick="_getTopSongs()" class="btn btn-primary">getTopSongs()</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div id="album" class="well">
+					<h2>Album<small>.js</small></h2>
+					<legend data-target="#getAlbumList" data-toggle="collapse">getAlbumList <i class="fa fa-eye"></i></legend>
+					<div id="getAlbumList" class="form-group collapse">
+						<label for="">type:</label>
+						<input type="text" class="form-control" id="getAlbumList_type">
+						<label for="">size:</label>
+						<input type="text" class="form-control" placeholder="default: 10" id="getAlbumList_size">
+						<label for="">offset</label>
+						<input type="text" class="form-control" placeholder="default: 0" id="getAlbumList_offset">
+						<label for="">fromYear:</label>
+						<input type="text" class="form-control" id="getAlbumList_fromYear">
+						<label for="">toYear:</label>
+						<input type="text" class="form-control" id="getAlbumList_toYear">
+						<label for="">genre:</label>
+						<input type="text" class="form-control" id="getAlbumList_genre">
+						<label for="">musicFolderId:</label>
+						<input type="text" class="form-control" id="getAlbumList_musicFolderId">
+						<button type="button" onclick="_getAlbumList()" class="btn btn-primary">getAlbumList()</button>
+					</div>
+					<legend data-target="#getAlbumList2" data-toggle="collapse">getAlbumList2 <i class="fa fa-eye"></i></legend>
+					<div id="getAlbumList2" class="form-group collapse">
+						<label for="">type:</label>
+						<input type="text" class="form-control" id="getAlbumList2_type">
+						<label for="">size:</label>
+						<input type="text" class="form-control" placeholder="default: 10" id="getAlbumList2_size">
+						<label for="">offset</label>
+						<input type="text" class="form-control" placeholder="default: 0" id="getAlbumList2_offset">
+						<label for="">fromYear:</label>
+						<input type="text" class="form-control" id="getAlbumList2_fromYear">
+						<label for="">toYear:</label>
+						<input type="text" class="form-control" id="getAlbumList2_toYear">
+						<label for="">genre:</label>
+						<input type="text" class="form-control" id="getAlbumList2_genre">
+						<label for="">musicFolderId:</label>
+						<input type="text" class="form-control" id="getAlbumList2_musicFolderId">
+						<button type="button" onclick="_getAlbumList2()" class="btn btn-primary">getAlbumList2()</button>
+					</div>
+					<legend data-target="#getRandomSongs" data-toggle="collapse">getRandomSongs <i class="fa fa-eye"></i></legend>
+					<div id="getRandomSongs" class="form-group collapse">
+						<label for="">size:</label>
+						<input type="text" class="form-control" placeholder="default: 10" id="getRandomSongs_size">
+						<label for="">genre:</label>
+						<input type="text" class="form-control" id="getRandomSongs_genre">
+						<label for="">fromYear:</label>
+						<input type="text" class="form-control" id="getRandomSongs_fromYear">
+						<label for="">toYear:</label>
+						<input type="text" class="form-control" id="getRandomSongs_toYear">
+						<label for="">musicFolderId:</label>
+						<input type="text" class="form-control" id="getRandomSongs_musicFolderId">
+						<button type="button" onclick="_getRandomSongs()" class="btn btn-primary">getRandomSongs()</button>
+					</div>
+					<legend data-target="#getSongsByGenre" data-toggle="collapse">getSongsByGenre <i class="fa fa-eye"></i></legend>
+					<div id="getSongsByGenre" class="form-group collapse">
+						<label for="">genre:</label>
+						<input type="text" class="form-control" id="getSongsByGenre_genre">
+						<label for="">count:</label>
+						<input type="text" class="form-control" placeholder="default: 10" id="getSongsByGenre_count">
+						<label for="">offset:</label>
+						<input type="text" class="form-control" placeholder="default: 0" id="getSongsByGenre_offset">
+						<label for="">musicFolderId:</label>
+						<input type="text" class="form-control" id="getSongsByGenre_musicFolderId">
+						<button type="button" onclick="_getSongsByGenre()" class="btn btn-primary">getSongsByGenre()</button>
+					</div>
+					<legend data-target="#getNowPlaying" data-toggle="collapse">getNowPlaying <i class="fa fa-eye"></i> </legend>
+					<div id="getNowPlaying" class="collapse">
+						<button type="button" onclick="_getNowPlaying()" class="btn btn-primary">getNowPlaying()</button>
+					</div>
+					<legend data-target="#getStarred" data-toggle="collapse">getStarred <i class="fa fa-eye"></i></legend>
+					<div id="getStarred" class="collapse">
+						<label for="">musicFolderId:</label>
+						<input type="text" class="form-control" id="getStarred_musicFolderId">
+						<button type="button" onclick="_getStarred()" class="btn btn-primary">getStarred()</button>
+					</div>
+					<legend data-target="#getStarred2" data-toggle="collapse">getStarred2 <i class="fa fa-eye"></i></legend>
+					<div id="getStarred2" class="collapse">
+						<label for="">musicFolderId:</label>
+						<input type="text" class="form-control" id="getStarred2_musicFolderId">
+						<button type="button" onclick="_getStarred2()" class="btn btn-primary">getStarred2()</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3">
+				<div id="searching" class="well">
+					<h2>Searching<small>.js</small></h2>
+					<legend data-target="#search" data-toggle="collapse">search <i class="fa fa-eye"></i></legend>
+					<div id="search" class="form-group collapse">
+						<label for="">artist:</label>
+						<input type="text" class="form-control" id="search_artist">
+						<label for="">album:</label>
+						<input type="text" class="form-control" id="search_album">
+						<label for="">title:</label>
+						<input type="text" class="form-control" id="search_title">
+						<label for="">any:</label>
+						<input type="text" class="form-control" id="search_any">
+						<label for="">count:</label>
+						<input type="text" class="form-control" placeholder="default: 20" id="search_count">
+						<label for="">offset:</label>
+						<input type="text" class="form-control" placeholder="default: 0" id="search_offset">
+						<label for="">newerThan:</label>
+						<input type="text" class="form-control" id="search_newerThan">
+						<button type="button" onclick="_search()" class="btn btn-primary">search()</button>
+					</div>
+					<legend data-target="#search2" data-toggle="collapse">search2 <i class="fa fa-eye"></i></legend>
+					<div id="search2" class="form-group collapse">
+						<label for="">query:</label>
+						<input type="text" class="form-control" id="search2_query">
+						<label for="">artistCount:</label>
+						<input type="text" class="form-control" placeholder="default: 20" id="search2_artistCount">
+						<label for="">artistOffset:</label>
+						<input type="text" class="form-control" placeholder="default: 0" id="search2_artistOffset">
+						<label for="">albumCount:</label>
+						<input type="text" class="form-control" placeholder="default: 20" id="search2_albumCount">
+						<label for="">albumOffset:</label>
+						<input type="text" class="form-control" placeholder="default: 0" id="search2_albumOffset">
+						<label for="">songCount:</label>
+						<input type="text" class="form-control" placeholder="default: 20" id="search2_songCount">
+						<label for="">songOffset:</label>
+						<input type="text" class="form-control" placeholder="default: 0" id="search2_songOffset">
+						<label for="">musicFolderId:</label>
+						<input type="text" class="form-control" id="search2_musicFolderId">
+						<button type="button" onclick="_search2()" class="btn btn-primary">search2()</button>
+					</div>
+					<legend data-target="#search3" data-toggle="collapse">search3 <i class="fa fa-eye"></i></legend>
+					<div id="search3" class="form-group collapse">
+						<label for="">query:</label>
+						<input type="text" class="form-control" id="search3_query">
+						<label for="">artistCount:</label>
+						<input type="text" class="form-control" placeholder="default: 20" id="search3_artistCount">
+						<label for="">artistOffset:</label>
+						<input type="text" class="form-control" placeholder="default: 0" id="search3_artistOffset">
+						<label for="">albumCount:</label>
+						<input type="text" class="form-control" placeholder="default: 20" id="search3_albumCount">
+						<label for="">albumOffset:</label>
+						<input type="text" class="form-control" placeholder="default: 0" id="search3_albumOffset">
+						<label for="">songCount:</label>
+						<input type="text" class="form-control" placeholder="default: 20" id="search3_songCount">
+						<label for="">songOffset:</label>
+						<input type="text" class="form-control" placeholder="default: 0" id="search3_songOffset">
+						<label for="">musicFolderId:</label>
+						<input type="text" class="form-control" id="search3_musicFolderId">
+						<button type="button" onclick="_search3()" class="btn btn-primary">search3()</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div id="playlists" class="well">
+					<h2>Playlists<small>.js</small></h2>
+					<legend data-target="#getPlaylists" data-toggle="collapse">getPlaylists <i class="fa fa-eye"></i></legend>
+					<div id="getPlaylists" class="form-group collapse">
+						<label for="">username:</label>
+						<input type="text" class="form-control" id="getPlaylists_username">
+						<button type="button" onclick="_getPlaylists()" class="btn btn-primary">getPlaylists()</button>
+					</div>
+					<legend data-target="#getPlaylist" data-toggle="collapse">getPlaylist <i class="fa fa-eye"></i></legend>
+					<div id="getPlaylist" class="form-group collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="getPlaylist_id">
+						<button type="button" onclick="_getPlaylist()" class="btn btn-primary">getPlaylist()</button>
+					</div>
+					<legend data-target="#createPlaylist" data-toggle="collapse">createPlaylist <i class="fa fa-eye"></i></legend>
+					<div id="createPlaylist" class="form-group collapse">
+						<label for="">playlistId:</label>
+						<input type="text" class="form-control" id="createPlaylist_playlistId">
+						<label for="">name:</label>
+						<input type="text" class="form-control" id="createPlaylist_name">
+						<label for="">songId:</label>
+						<input type="text" class="form-control" id="createPlaylsit_songId">
+						<button type="button" onclick="_createPlauylist()" class="btn btn-primary">createPlaylist()</button>
+					</div>
+					<legend data-target="#updatePlaylist" data-toggle="collapse">updatePlaylist<i class="fa fa-eye"></i></legend>
+					<div id="updatePlaylist" class="form-group collapse">
+						<label for="">playlistId:</label>
+						<input type="text" class="form-control" id="updatePlaylist_playlistId">
+						<label for="">name:</label>
+						<input type="text" class="form-control" id="updatePlaylist_name">
+						<label for="">comment:</label>
+						<input type="text" class="form-control" id="updatePlaylist_comment">
+						<label for="">public:</label>
+						<input type="text" class="form-control" id="updatePlaylist_public">
+						<label for="">songIdToAdd:</label>
+						<input type="text" class="form-control" id="updatePlaylist_songIdToAdd">
+						<label for="">songIndexToRemove:</label>
+						<input type="text" class="form-control" id="updatePlaylist_songIndexToRemove">
+						<button type="button" onclick="_updatePlaylist()" class="btn btn-primary">updatePlaylist()</button>
+					</div>
+					<legend data-target="#deletePlaylist" data-toggle="collapse">deletePlaylist<i class="fa fa-eye"></i></legend>
+					<div id="deletePlaylist" class="form-group collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="deletePlaylist_id">
+						<button type="button" onclick="_deletePlaylist()" class="btn btn-primary">deletePlaylist()</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div id="mediaretrieval" class="well">
+					<h2>MediaRetrieval<small>.js</small></h2>
+					<legend data-target="#stream" data-toggle="collapse">stream<i class="fa fa-eye"></i></legend>
+					<div id="stream" class="form-group collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="stream_id">
+						<label for="">maxBitRate:</label>
+						<input type="text" class="form-control" id="stream_maxBitRate">
+						<label for="">format:</label>
+						<input type="text" class="form-control" id="stream_format">
+						<label for="">timeOffset:</label>
+						<input type="text" class="form-control" id="stream_timeOffset">
+						<label for="">size:</label>
+						<input type="text" class="form-control" id="stream_size">
+						<label for="">estimateContentLength:</label>
+						<input type="text" class="form-control" placeholder="default: false" id="stream_estimateContentLength">
+						<label for="">converted:</label>
+						<input type="text" class="form-control" placeholder="default: false" id="stream_converted">
+						<button type="button" onclick="_stream()" class="btn btn-primary">stream()</button>
+					</div>
+					<legend data-target="#download" data-toggle="collapse">download<i class="fa fa-eye"></i></legend>
+					<div id="download" class="form-group collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="download_id">
+						<button type="button" onclick="_download()" class="btn btn-primary">download()</button>
+					</div>
+					<legend data-target="#hls" data-toggle="collapse">hls <i class="fa fa-eye"></i></legend>
+					<div id="hls" class="form-group collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="hls_id">
+						<label for="">bitRate:</label>
+						<input type="text" class="form-control" id="hls_bitRate">
+						<label for="">audioTrack:</label>
+						<input type="text" class="form-control" id="hls_audioTrack">
+						<button type="button" onclick="_hls()" class="btn btn-primary">hls()</button>
+					</div>
+					<legend data-target="#getCaptions" data-toggle="collapse">getCaptions<i class="fa fa-eye"></i></legend>
+					<div id="getCaptions" class="form-group collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="getCaption_id">
+						<label for="">format:</label>
+						<input type="text" class="form-control" id="getCaption_format">
+						<button type="button" onclick="_getCaptions()" class="btn btn-primary">getCaptions()</button>
+					</div>
+					<legend data-target="#getCoverArt" data-toggle="collapse">getCoverArt<i class="fa fa-eye"></i></legend>
+					<div id="getCoverArt" class="form-group collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="getCoverArt_id">
+						<label for="">size:</label>
+						<input type="text" class="form-control" id="getCoverArt_size">
+						<button type="button" onclick="_getCoverArt()" class="btn btn-primary">getCoverArt()</button>
+					</div>
+					<legend data-target="#getLyrics" data-toggle="collapse">getLyrics<i class="fa fa-eye"></i></legend>
+					<div id="getLyrics" class="form-group collapse">
+						<label for="">artist:</label>
+						<input type="text" class="form-control" id="getLyrics_artist">
+						<label for="">title:</label>
+						<input type="text" class="form-control" id="getLyrics_title">
+						<button type="button" onclick="_getLyrics()" class="btn btn-primary">getLyrics()</button>
+					</div>
+					<legend data-target="#getAvatar" data-toggle="collapse">getAvatar<i class="fa fa-eye"></i></legend>
+					<div id="getAvatar" class="form-group collapse">
+						<label for="">username:</label>
+						<input type="text" class="form-control" id="getAvatar_username">
+						<button type="button" onclick="_getAvatar()" class="btn btn-primary">getAvatar()</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div id="mediaannotation" class="well">
+					<h2>MediaAnnotation<small>.js</small></h2>
+					<legend data-target="#star" data-toggle="collapse">star<i class="fa fa-eye"></i></legend>
+					<div id="star" class="form-group collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="star_id">
+						<label for="">albumId:</label>
+						<input type="text" class="form-control" id="star_albumId">
+						<label for="">artistId:</label>
+						<input type="text" class="form-control" id="star_artistId">
+						<button type="button" onclick="_star()" class="btn btn-primary">star()</button>
+					</div>
+					<legend data-target="#unstar" data-toggle="collapse">unstar<i class="fa fa-eye"></i></legend>
+					<div id="unstar" class="form-group collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="unstar_id">
+						<label for="">albumId:</label>
+						<input type="text" class="form-control" id="unstar_albumId">
+						<label for="">artistId:</label>
+						<input type="text" class="form-control" id="unstar_artistId">
+						<button type="button" onclick="_unstar()" class="btn btn-primary">unstar()</button>
+					</div>
+					<legend data-target="#setRating" data-toggle="collapse">setRating<i class="fa fa-eye"></i></legend>
+					<div id="setRating" class="form-group collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="setRating_id">
+						<label for="">rating:</label>
+						<input type="text" class="form-control" id="setRating_rating">
+						<button type="button" onclick="_setRating()" class="btn btn-primary">setRating()</button>
+					</div>
+					<legend data-target="#scrobble" data-toggle="collapse">scrobble<i class="fa fa-eye"></i></legend>
+					<div id="scrobble" class="form-group collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="scrobble_id">
+						<label for="">time:</label>
+						<input type="text" class="form-control" id="scrobble_time">
+						<label for="">submission:</label>
+						<input type="text" class="form-control" placeholder="default: true" id="scrobble_submission">
+						<button type="button" onclick="_scrobble()" class="btn btn-primary">scrobble()</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3">
+				<div id="sharing" class="well">
+					<h2>Sharing<small>.js</small></h2>
+					<legend data-target="#getShares" data-toggle="collapse">getShares<i class="fa fa-eye"></i></legend>
+					<div id="getShares" class="collapse">
+						<button type="button" onclick="_getShares()" class="btn btn-primary">getShares()</button>
+					</div>
+					<legend data-target="#createShare" data-toggle="collapse">createShare<i class="fa fa-eye"></i></legend>
+					<div id="createShare" class="form-group collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="createShare_id">
+						<label for="">description:</label>
+						<input type="text" class="form-control" id="createShare_description">
+						<label for="">expires:</label>
+						<input type="text" class="form-control" id="createShare_expires">
+						<button type="button" onclick="_createShare()" class="btn btn-primary">createShare()</button>
+					</div>
+					<legend data-target="#updateShare" data-toggle="collapse">updateShare<i class="fa fa-eye"></i></legend>
+					<div id="updateShare" class="form-group collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="updateShare_id">
+						<label for="">description:</label>
+						<input type="text" class="form-control" id="updateShare_description">
+						<label for="">expires:</label>
+						<input type="text" class="form-control" id="updateShare_expires">
+						<button type="button" onclick="_createShare()" class="btn btn-primary">createShare()</button>
+					</div>
+					<legend data-target="#deleteShare" data-toggle="collapse">deleteShare<i class="fa fa-eye"></i></legend>
+					<div id="deleteShare" class="form-group collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="deleteShare_id">
+						<button type="button" onclick="_deleteShare()" class="btn btn-primary">deleteShare()</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div id="podcast" class="well">
+					<h2>Podcast<small>.js</small></h2>
+					<legend data-target="#getPodcasts" data-toggle="collapse">getPodcasts <i class="fa fa-eye"></i></legend>
+					<div id="getPodcasts" class="form-group collapse">
+						<label for="">includeEpisodes:</label>
+						<input type="text" class="form-control" id="getPodcasts_includeEpisodes">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="getPodcasts_id">
+						<button type="button" onclick="_getPodcasts()" class="btn btn-primary">getPodcasts()</button>
+					</div>
+					<legend data-target="#getNewestPodcasts" data-toggle="collapse">getNewestPodcasts<i class="fa fa-eye"></i></legend>
+					<div id="getNewestPodcasts" class="form-group collapse">
+						<label for="">count:</label>
+						<input type="text" class="form-control" id="getNewestPodcasts_count">
+						<button type="button" onclick="_getNewestPodcasts()" class="btn btn-primary">getNewestPodcasts()</button>
+					</div>
+					<legend data-target="#refreshPodcasts" data-toggle="collapse">refreshPodcasts<i class="fa fa-eye"></i></legend>
+					<div id="refreshPodcasts" class="collapse">
+						<button type="button" onclick="_refreshPodcasts()" class="btn btn-primary">refreshPodcasts()</button>
+					</div>
+					<legend data-target="#createPodcastChannel" data-toggle="collapse">createPodcastChannel<i class="fa fa-eye"></i></legend>
+					<div id="createPodcastChannel" class="form-group collapse">
+						<label for="">url:</label>
+						<input type="text" class="form-control" id="createPodcastChannel_url">
+						<button type="button" onclick="_createPodcastChannel()" class="btn btn-primary">createPodcastChannel()</button>
+					</div>
+					<legend data-target="#deletePodcastChannel" data-toggle="collapse">deletePodcastChannel<i class="fa fa-eye"></i></legend>
+					<div id="deletePodcastChannel" class="form-group collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="deletePodcastChannel_id">
+						<button type="button" onclick="_deletePodcastChannel()" class="btn btn-primary">deletePodcastChannel()</button>
+					</div>
+					<legend data-target="#deletePodcastEpisode" data-toggle="collapse">deletePodcastEpisode<i class="fa fa-eye"></i></legend>
+					<div id="deletePodcastEpisode" class="form-group collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="deletePodcastEpisode_id">
+						<button type="button" onclick="_deletePodcastEpisode()" class="btn btn-primary">deletePodcastEpisode()</button>
+					</div>
+					<legend data-target="#downloadPodcastEpisode" data-toggle="collapse">downloadPodcastEpisode<i class="fa fa-eye"></i></legend>
+					<div id="downloadPodcastEpisode" class="form-group collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="downloadPodcastEpisode_id">
+						<button type="button" onclick="_downloadPodcastEpisode()" class="btn btn-primary">downloadPodcastEpisode()</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div id="jukebox" class="well">
+					<h2>Jukebox<small>.js</small></h2>
+					<legend data-target="#jukeboxControl" data-toggle="collapse">jukeboxControl<i class="fa fa-eye"></i></legend>
+					<div id="jukeboxControl" class="form-group collapse">
+						<label for="">action:</label>
+						<input type="text" class="form-control" id="jukeboxControl_action">
+						<label for="">index:</label>
+						<input type="text" class="form-control" id="jukeboxControl_index">
+						<label for="">offset:</label>
+						<input type="text" class="form-control" id="jukeboxControl_offset">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="jukeboxControl_id">
+						<label for="">gain:</label>
+						<input type="text" class="form-control" id="jukeboxControl_gain">
+						<button type="button" onclick="_jukeboxControl()" class="btn btn-primary">jukeboxControl()</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div id="internetradio" class="well">
+					<h2>InternetRadio<small>.js</small></h2>
+					<legend data-target="#getInternetRadioStations" data-toggle="collapse">getInternetRadioStations<i class="fa fa-eye"></i></legend>
+					<div id="getInternetRadioStations" class="collapse">
+						<button type="button" onclick="_getInternetRadioStations()" class="btn btn-primary">getInternetRadioStations()</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3">
+				<div id="chat" class="well">
+					<h2>Chat<small>.js</small></h2>
+					<legend data-target="#getChatMessages" data-toggle="collapse">getChatMessages<i class="fa fa-eye"></i></legend>
+					<div id="getChatMessages" class="form-group collapse">
+						<label for="">since:</label>
+						<input type="text" class="form-control" id="getChatMessages_since">
+						<button type="button" onclick="_getChatMessages()" class="btn btn-primary">getChatMessages()</button>
+					</div>
+					<legend data-target="#addChatMessage" data-toggle="collapse">addChatMessage<i class="fa fa-eye"></i></legend>
+					<div id="addChatMessage" class="form-group collapse">
+						<label for="">message:</label>
+						<input type="text" class="form-control" id="addChatMessage_message">
+						<button type="button" onclick="_addChatMessage()" class="btn btn-primary">addChatMessage()</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div id="usermanagement" class="well">
+					<h2>UserManagement<small>.js</small></h2>
+					<legend data-target="#getUser" data-toggle="collapse">getUser<i class="fa fa-eye"></i></legend>
+					<div id="getUser" class="form-group collapse">
+						<label for="">username:</label>
+						<input type="text" class="form-control" id="getUser_username">
+						<button type="button" onclick="_getUser()" class="btn btn-primary">getUser()</button>
+					</div>
+					<legend data-target="#getUsers" data-toggle="collapse">getUsers<i class="fa fa-eye"></i></legend>
+					<div id="getUsers" class="collapse">
+						<button type="button" onclick="_getUsers()" class="btn btn-primary">getUsers()</button>
+					</div>
+					<legend data-target="#createUser" data-toggle="collapse">createUser<i class="fa fa-eye"></i></legend>
+					<div id="createUser" class="collapse">
+						<label for="">username:</label>
+						<input type="text" class="form-control" id="createUser_username">
+						<label for="">password:</label>
+						<input type="text" class="form-control" id="createUser_password">
+						<label for="">email:</label>
+						<input type="text" class="form-control" id="createUser_email">
+						<label for="">ldapAuthenticated:</label>
+						<input type="text" class="form-control" placeholder="default: false" id="createUser_ldapAuthenticated">
+						<label for="">adminRole:</label>
+						<input type="text" class="form-control" placeholder="default: false" id="createUser_adminRole">
+						<label for="">settingsRole:</label>
+						<input type="text" class="form-control" placeholder="default: true" id="createUser_settingsRole">
+						<label for="">streamRole:</label>
+						<input type="text" class="form-control" placeholder="default: true" id="createUser_streamRole">
+						<label for="">jukeboxRole:</label>
+						<input type="text" class="form-control" placeholder="default: false" id="createUser_jukeboxRole">
+						<label for="">downloadRole:</label>
+						<input type="text" class="form-control" placeholder="default: false" id="creatreUser_downloadRole">
+						<label for="">uploadRole:</label>
+						<input type="text" class="form-control" placeholder="default: false" id="createUser_uploadRole">
+						<label for="">playlistRole:</label>
+						<input type="text" class="form-control" placeholder="default: false" id="createUser_playlistRole">
+						<label for="">coverArtRole:</label>
+						<input type="text" class="form-control" placeholder="default: false" id="createUser_coverArtRole">
+						<label for="">commentRole:</label>
+						<input type="text" class="form-control" placeholder="default: false" id="createUser_commentRole">
+						<label for="">podcastRole:</label>
+						<input type="text" class="form-control" placeholder="default: false" id="createUser_podcastRole">
+						<label for="">shareRole:</label>
+						<input type="text" class="form-control" placeholder="default: false" id="createUser_shareRole">
+						<label for="">videoConversionRole:</label>
+						<input type="text" class="form-control" placeholder="default: false" id="creatreUser_videoConversionRole">
+						<label for="">musicFolderId:</label>
+						<input type="text" class="form-control" id="createUser_musicFolderId">
+						<button type="button" onclick="_createUser()" class="btn btn-primary">createUser()</button>
+					</div>
+					<legend data-target="#updateUser" data-toggle="collapse">updateUser<i class="fa fa-eye"></i></legend>
+					<div id="updateUser" class="form-group collapse">
+						<label for="">username:</label>
+						<input type="text" class="form-control" id="updateUser_username">
+						<label for="">password:</label>
+						<input type="text" class="form-control" id="updateUser_password">
+						<label for="">email:</label>
+						<input type="text" class="form-control" id="updateUser_email">
+						<label for="">ldapAuthenticated:</label>
+						<input type="text" class="form-control" placeholder="default: false" id="updateUser_ldapAuthenticated">
+						<label for="">adminRole:</label>
+						<input type="text" class="form-control" placeholder="default: false" id="updateUser_adminRole">
+						<label for="">settingsRole:</label>
+						<input type="text" class="form-control" placeholder="default: true" id="updateUser_settingsRole">
+						<label for="">streamRole:</label>
+						<input type="text" class="form-control" placeholder="default: true" id="updateUser_streamRole">
+						<label for="">jukeboxRole:</label>
+						<input type="text" class="form-control" placeholder="default: false" id="updateUser_jukeboxRole">
+						<label for="">downloadRole:</label>
+						<input type="text" class="form-control" placeholder="default: false" id="updateUser_downloadRole">
+						<label for="">uploadRole:</label>
+						<input type="text" class="form-control" placeholder="default: false" id="updateUser_uploadRole">
+						<label for="">playlistRole:</label>
+						<input type="text" class="form-control" placeholder="default: false" id="updateUser_playlistRole">
+						<label for="">coverArtRole:</label>
+						<input type="text" class="form-control" placeholder="default: false" id="updateUser_coverArtRole">
+						<label for="">commentRole:</label>
+						<input type="text" class="form-control" placeholder="default: false" id="updateUser_commentRole">
+						<label for="">podcastRole:</label>
+						<input type="text" class="form-control" placeholder="default: false" id="updateUser_podcastRole">
+						<label for="">shareRole:</label>
+						<input type="text" class="form-control" placeholder="default: false" id="updateUser_shareRole">
+						<label for="">videoConversionRole:</label>
+						<input type="text" class="form-control" placeholder="default: false" id="updateUser_videoConversionRole">
+						<label for="">musicFolderId:</label>
+						<input type="text" class="form-control" id="updateUser_musicFolderId">
+						<label for="">maxBitRate:</label>
+						<input type="text" class="form-control" id="updateUser_maxBitRate">
+						<button type="button" onclick="_updateUser()" class="btn btn-primary">updateUser()</button>
+					</div>
+					<legend data-target="#deleteUser" data-toggle="collapse">deleteUser<i class="fa fa-eye"></i></legend>
+					<div id="deleteUser" class="form-group collapse">
+						<label for="">username:</label>
+						<input type="text" class="form-control" id="deleteUser_username">
+						<button type="button" onclick="_deleteUser()" class="btn btn-primary">deleteUser()</button>
+					</div>
+					<legend data-target="#changePassword" data-toggle="collapse">changePassword<i class="fa fa-eye"></i></legend>
+					<div id="changePassword" class="form-group collapse">
+						<label for="">username:</label>
+						<input type="text" class="form-control" id="changePassword_username">
+						<label for="">password:</label>
+						<input type="text" class="form-control" id="changePassword_password">
+						<button type="button" onclick="_changePassword()" class="btn btn-primary">changePassword()</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div id="bookmarks" class="well">
+					<h2>Bookmarks<small>.js</small></h2>
+					<legend data-target="#getBookmarks" data-toggle="collapse">getBookmarks<i class="fa fa-eye"></i></legend>
+					<div id="getBookmarks" class="collapse">
+						<button type="button" onclick="_getBookmarks()" class="btn btn-primary">getBookmarks()</button>
+					</div>
+					<legend data-target="#createBookmark" data-toggle="collapse">createBookmark<i class="fa fa-eye"></i></legend>
+					<div id="createBookmark" class="form-group collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="createBookmark_id">
+						<label for="">position:</label>
+						<input type="text" class="form-control" id="createBookmark_position">
+						<label for="">comment:</label>
+						<input type="text" class="form-control" id="createBookmark_comment">
+						<button type="button" onclick="_createBookmark()" class="btn btn-primary">createBookmark()</button>
+					</div>
+					<legend data-target="#deleteBookmark" data-toggle="collapse">deleteBookmark<i class="fa fa-eye"></i></legend>
+					<div id="deleteBookmark" class="form-group collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="deleteBookmark_id">
+						<button type="button" onclick="_deleteBookmark()" class="btn btn-primary">deleteBookmark()</button>
+					</div>
+					<legend data-target="#getPlayQueue" data-toggle="collapse">getPlayQueue<i class="fa fa-eye"></i></legend>
+					<div id="getPlayQueue" class="collapse">
+						<button type="button" onclick="_getPlayQueue()" class="btn btn-primary">getPlayQueue()</button>
+					</div>
+					<legend data-target="#savePlayQueue" data-toggle="collapse">savePlayQueue<i class="fa fa-eye"></i></legend>
+					<div id="savePlayQueue" class="form-group collapse">
+						<label for="">id:</label>
+						<input type="text" class="form-control" id="savePlayQueue_id">
+						<label for="">current:</label>
+						<input type="text" class="form-control" id="savePlayQueue_current">
+						<label for="">position:</label>
+						<input type="text" class="form-control" id="savePlayQueue_position">
+						<button type="button" onclick="_savePlayQueue()" class="btn btn-primary">savePlayQueue()</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div id="mediascanning" class="well">
+					<h2>MediaScanning<small>.js</small></h2>
+					<legend data-target="#getScanStatus" data-toggle="collapse">getScanStatus<i class="fa fa-eye"></i></legend>
+					<div id="getScanStatus" class="collapse">
+						<button type="button" onclick="_getScanStatus()" class="btn btn-primary">getScanStatus()</button>
+					</div>
+					<legend data-target="#startScan" data-toggle="collapse">startScan<i class="fa fa-eye"></i></legend>
+					<div id="startScan" class="collapse">
+						<button type="button" onclick="_startScan()" class="btn btn-primary">startScan()</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="http://use.edgefonts.net/doppio-one:n4:all;droid-sans-mono:n4:all;monoton:n4:all;montserrat:n4:all;ubuntu-mono:n7,i7,n4,i4:all.js"></script>
+	<script src="js/md5.js"></script>
+	<script src="js/Album.js"></script>
+	<script src="js/Authenticate.js"></script>
+	<script src="js/Bookmarks.js"></script>
+	<script src="js/Browsing.js"></script>
+	<script src="js/Chat.js"></script>
+	<script src="js/InternetRadio.js"></script>
+	<script src="js/Jukebox.js"></script>
+	<script src="js/MediaAnnotation.js"></script>
+	<script src="js/MediaRetrieval.js"></script>
+	<script src="js/MediaScanning.js"></script>
+	<script src="js/Playlists.js"></script>
+	<script src="js/Podcast.js"></script>
+	<script src="js/Searching.js"></script>
+	<script src="js/Sharing.js"></script>
+	<script src="js/System.js"></script>
+	<script src="js/UserManagement.js"></script>
+	<script>
+		/* FIXME Auths */
+		$('document').ready(loadForm());
+		var items = [
+			"loginUrl", "loginUsername", "loginPassword", "loginRestVersion", "loginAppName"
+		];
+		var ids = [
+			"login_url", "login_username", "login_password", "login_rest_version", "login_app_name"
+		];
+		var auth = new Authenticate(localStorage.getItem(items[0]), localStorage.getItem(items[1]), localStorage.getItem(items[2]), localStorage.getItem(items[3]), localStorage.getItem(items[4]), localStorage.getItem(items[5]));
+
+		function log(result) {
+			console.log(result);
+			document.getElementById("console_text").innerHTML = "<xmp>" + result + "</xmp>";
+		}
+
+		function getForm(id) {
+			return document.getElementById(id).value;
+		}
+
+		function setForm(id, value) {
+			document.getElementById(id).value = value;
+		}
+
+		function saveForm() {
+			var items = [
+				"loginUrl", "loginUsername", "loginPassword", "loginRestVersion", "loginAppName"
+			];
+			var ids = [
+				"login_url", "login_username", "login_password", "login_rest_version", "login_app_name"
+			];
+			for (var i = 0; i < items.length; i++) {
+				localStorage.setItem(items[i], getForm(ids[i]));
+			}
+			alert("Login Settings Saved!");
+		}
+
+		function loadForm() {
+			var items = [
+				"loginUrl", "loginUsername", "loginPassword", "loginRestVersion", "loginAppName"
+			];
+			var ids = [
+				"login_url", "login_username", "login_password", "login_rest_version", "login_app_name"
+			];
+			for (var i = 0; i < items.length; i++) {
+				setForm(ids[i], localStorage.getItem(items[i]));
+			}
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		/*
+		 *	Album.js Implmentation
+		 */
+
+		function _getAlbumList() {
+			var type = getForm("getAlbumList_type");
+			var size = getForm("getAlbumList_size");
+			var offset = getForm("getAlbumList_offset");
+			var fromYear = getForm("getAlbumList_fromYear");
+			var toYear = getForm("getAlbumList_toYear");
+			var genre = getForm("getAlbumList_genre");
+			var musicFolderId = getForm("getAlbumList_musicFolderId");
+			getAlbumList(auth, type, size, offset, fromYear, toYear, genre, musicFolderId, function() {
+				log(this);
+			});
+		}
+
+		function _getAlbumList2() {
+			var type = getForm("getAlbumList2_type");
+			var size = getForm("getAlbumList2_size");
+			var offset = getForm("getAlbumList2_offset");
+			var fromYear = getForm("getAlbumList2_fromYear");
+			var toYear = getForm("getAlbumList2_toYear");
+			var genre = getForm("getAlbumList2_genre");
+			var musicFolderId = getForm("getAlbumList2_musicFolderId");
+			getAlbumList2(auth, type, size, offset, fromYear, toYear, genre, musicFolderId, function() {
+				log(this);
+			});
+		}
+
+		function _getRandomSongs() {
+			var size = getForm("getRandomSongs_size");
+			var genre = getForm("getRandomSongs_genre");
+			var fromYear = getForm("getRandomSongs_fromYear");
+			var toYear = getForm("getRandomSongs_toYear");
+			var musicFolderId = getForm("getRandomSongs_musicFolderId");
+			getRandomSongs(auth, size, genre, fromYear, toYear, musicFolderId, function() {
+				log(this);
+			});
+		}
+
+		function _getSongsByGenre() {
+			var genre = getForm("getSongsByGenre_genre");
+			var count = getForm("getSongsByGenre_count");
+			var offset = getForm("getSongsByGenre_offset");
+			var musicFolderId = getForm("getSongsByGenre_musicFolderId");
+			getSongsByGenre(auth, genre, count, offset, musicFolderId, function() {
+				log(this);
+			});
+		}
+
+		function _getNowPlaying() {
+			getNowPlaying(auth, function() {
+				log(this);
+			});
+		}
+
+		function _getStarred() {
+			var musicFolderId = getForm("getStarred_musicFolderId");
+			getStarred(auth, musicFolderId, function() {
+				log(this);
+			});
+		}
+
+		function _getStarred2() {
+			var musicFolderId = getForm("getStarred2_musicFolderId");
+			getStarred2(auth, musicFolderId, function() {
+				log(this);
+			});
+		}
+
+		/*
+		 *	Authtenticate.js Implementation
+		 */
+
+		function _salt() {
+			var result = auth.generateSalt();
+			log(result);
+		}
+
+		function _token() {
+			var result = auth.generateToken(auth.generateSalt());
+			log(result);
+		}
+
+		function _apiCall() {
+			var result = auth.generateApiCall("ping", "");
+			log(result);
+		}
+
+		/*
+		 *	Bookmarks.js Implementation
+		 */
+
+		function _getBookmarks() {
+			getBookmarks(auth, function() {
+				log(this);
+			});
+		}
+
+		function _createBookmark() {
+			var id = getForm("createBookmark_id");
+			var position = getForm("createBookmark_position");
+			var comment = getForm("createUser_comment");
+			createBookmark(auth, id, position, comment, function() {
+				log(this);
+			});
+		}
+
+		function _deleteBookmark() {
+			var id = getForm("deleteBookmark_id");
+			deleteBookmark(auth, id, function() {
+				log(this);
+			});
+		}
+
+		function _getPlayQueue() {
+			getPlayQueue(auth, function() {
+				log(this);
+			});
+		}
+
+		function _savePlayQueue() {
+			var id = getForm("savePlayQueue_id");
+			var current = getForm("savePlayQueue_current");
+			var position = getForm("savePlayQueue_position");
+			savePlayQueue(auth, id, current, position, function() {
+				log(this);
+			});
+		}
+
+		/*
+		 *	Browsing.js Implementation
+		 */
+
+		function _getMusicFolders() {
+			getMusicFolders(auth, function() {
+				log(this);
+			});
+		}
+
+		function _getIndexes() {
+			var musicFolderId = getForm("getIndexes_musicFolderId");
+			var ifModifiedSince = getForm("getIndexes_ifModifiedSince");
+			console.log(musicFolderId);
+			getIndexes(auth, musicFolderId, ifModifiedSince, function() {
+				log(this);
+			});
+		}
+
+		function _getMusicDirectory() {
+			var id = getForm("getMusicDirectory_id");
+			getMusicDirectory(auth, id, function() {
+				log(this);
+			});
+		}
+
+		function _getGenres() {
+			getGenres(auth, function() {
+				log(this);
+			});
+		}
+
+		function _getArtists() {
+			var musicFolderId = getForm("getArtists_musicFolderId");
+			getArtists(auth, musicFolderId, function() {
+				log(this);
+			});
+		}
+
+		function _getArtist() {
+			var id = getForm("getArtist_id");
+			getArtist(auth, id, function() {
+				log(this);
+			});
+		}
+
+		function _getAlbum() {
+			var id = getForm("getAlbum_id");
+			getAlbum(auth, id, function() {
+				log(this);
+			});
+		}
+
+		function _getSong() {
+			var id = getForm("getSong_id");
+			getSong(auth, id, function() {
+				log(this);
+			});
+		}
+
+		function _getVideos() {
+			getVideos(auth, function() {
+				log(this);
+			});
+		}
+
+		function _getVideoInfo() {
+			var id = getForm("getVideoInfo_id");
+			getVideoInfo(auth, id, function() {
+				log(this);
+			});
+		}
+
+		function _getArtistInfo() {
+			var id = getForm("getArtistInfo_id");
+			var count = getForm("getArtistInfo_count");
+			var includeNotPresent = getForm("getArtistInfo_includeNotPresent");
+			getArtistInfo(auth, id, count, includeNotPresent, function() {
+				log(this);
+			});
+		}
+
+		function _getArtistInfo2() {
+			var id = getForm("getArtistInfo2_id");
+			var count = getForm("getArtistInfo2_count");
+			var includeNotPresent = getForm("getArtistInfo2_includeNotPresent");
+			getArtistInfo2(auth, id, count, includeNotPresent, function() {
+				log(this);
+			});
+		}
+
+		function _getAlbumInfo() {
+			var id = getForm("getAlbumInfo_id");
+			getAlbumInfo(auth, id, function() {
+				log(this);
+			});
+		}
+
+		function _getAlbumInfo2() {
+			var id = getForm("getAlbumInfo2_id");
+			getAlbumInfo2(auth, id, function() {
+				log(this);
+			});
+		}
+
+		function _getSimilarSongs() {
+			var id = getForm("getSimilarSongs_id");
+			var count = getForm("getSimilarSongs_count");
+			getSimilarSongs(auth, id, count, function() {
+				log(this);
+			});
+		}
+
+		function _getSimilarSongs2() {
+			var id = getForm("getSimilarSongs2_id");
+			var count = getForm("getSimilarSongs2_count");
+			getSimilarSongs2(auth, id, count, function() {
+				log(this);
+			});
+		}
+
+		function _getTopSongs() {
+			var artist = getForm("getTopSongs_artist");
+			var count = getForm("getTopSongs_count");
+			getTopSongs(auth, artist, count, function() {
+				log(this);
+			});
+		}
+
+		/*
+		 *	Chat.js  Implementation
+		 */
+
+		function _getChatMessages() {
+			var since = getForm("getChatMessages_since");
+			getChatMessages(auth, since, function() {
+				log(this);
+			});
+		}
+
+		function _addChatMessage() {
+			var message = getForm("addChatMessage_message");
+			addChatMessage(auth, message, function() {
+				log(this);
+			});
+		}
+
+		/*
+		 *	InternetRadio.js Implementation
+		 */
+
+		function _getInternetRadioStations() {
+			getInternetRadioStations(auth, function() {
+				log(this);
+			});
+		}
+
+		/*
+		 *	Jukebox.js Implementation
+		 */
+
+		function _jukeboxControl() {
+			var action = getForm("jukeboxControl_action");
+			var index = getForm("jukeboxControl_index");
+			var offset = getForm("jukeboxControl_offset");
+			var id = getForm("jukeboxControl_id");
+			var gain = getForm("jukeboxControl_gain");
+			jukeboxControl(auth, action, index, offset, id, gain, function() {
+				log(this);
+			});
+		}
+
+		/*
+		 *	MediaAnnotation.js Implementation
+		 */
+
+		function _star() {
+			var id = getForm("star_id");
+			var albumId = getForm("star_albumId");
+			var artistId = getForm("star_artistId");
+			star(auth, id, albumId, artistId, function() {
+				log(this);
+			});
+		}
+
+		function _unstar() {
+			var id = getForm("unstar_id");
+			var albumId = getForm("unstar_albumId");
+			var artistId = getForm("unstar_artistId");
+			unstar(auth, id, albumId, artistId, function() {
+				log(this);
+			});
+		}
+
+		function _setRating() {
+			var id = getForm("setRating_id");
+			var rating = getForm("setRating_rating");
+			setRating(auth, id, rating, function() {
+				log(this);
+			});
+		}
+
+		function _scrobble() {
+			var id = getForm("scrobble_id");
+			var time = getForm("scrobble_time");
+			var submission = getForm("scrobble_submission");
+			scrobble(auth, id, time, submission, function() {
+				log(this);
+			});
+		}
+
+		/*
+		 *	MediaRetrieval.js Implementation
+		 */
+
+		function _stream() {
+			var id = getForm("stream_id");
+			var maxBitRate = getForm("stream_maxBitRate");
+			var format = getForm("stream_format");
+			var timeOffset = getForm("stream_timeOffset");
+			var size = getForm("stream_size");
+			var estimateContentLength = getForm("stream_estimateContentLength");
+			var converted = getForm("stream_converted");
+			stream(auth, id, maxBitRate, format, timeOffset, size, estimateContentLength, converted, function() {
+				log(this);
+				var audio = document.getElementById("player_audio"),
+					source = document.getElementById("player_source");
+				source.src = this;
+				audio.load();
+				audio.volume = 1;
+				audio.pause();
+				setTimeout(function() {
+					audio.play();
+				}, 150);
+			});
+		}
+
+		function _download() {
+			var id = getForm("download_id");
+			download(auth, id, function() {
+				log(this);
+			});
+		}
+
+		function _hls() {
+			var id = getForm("hls_id");
+			var bitRate = getForm("hls_bitRate");
+			var audioTrack = getForm("hls_audioTrack");
+			hls(auth, id, bitRate, audioTrack, function() {
+				log(this);
+			});
+		}
+
+		function _getCaptions() {
+			var id = getForm("getCaptions_id");
+			var format = getForm("getCaptions_format");
+			getCaptions(auth, id, format, function() {
+				log(this);
+			});
+		}
+
+		function _getCoverArt() {
+			var id = getForm("getCaptions_id");
+			var size = getForm("getCaptions_size");
+			getCoverArt(auth, id, size, function() {
+				log(this);
+			});
+		}
+
+		function _getLyrics() {
+			var artist = getForm("getLyrics_artist");
+			var title = getForm("getLyrics_title");
+			getLyrics(auth, artist, title, function() {
+				log(this);
+			});
+		}
+
+		function _getAvatar() {
+			var username = getForm("getAvatar_username");
+			getAvatar(auth, username, function() {
+				log(this);
+			});
+		}
+
+		/*
+		 *	MediaScanning.js Implementation
+		 */
+
+		function _getScanStatus() {
+			getScanStatus(auth, function() {
+				log(this);
+			});
+		}
+
+		function _startScan() {
+			startScan(auth, function() {
+				log(this);
+			});
+		}
+
+		/*
+		 *	Playlists.js Implementation
+		 */
+
+		function _getPlaylists() {
+			var username = getForm("getPlaylists_username");
+			getPlaylists(auth, username, function() {
+				log(this);
+			});
+		}
+
+		function _getPlaylist() {
+			var id = getForm("getPlaylist_id");
+			getPlaylist(auth, id, function() {
+				log(this);
+			});
+		}
+
+		function _createPlaylist() {
+			var playlistId = getForm("createPlaylist_playlistId");
+			var name = getForm("createPlaylist_name");
+			var songId = getForm("createPlaylist_songId");
+			createPlaylist(auth, playlistId, name, songId, function() {
+				log(this);
+			});
+		}
+
+		function _updatePlaylist() {
+			var playlistId = getForm("updatePlaylist_playlistId");
+			var name = getForm("updatePlaylist_name");
+			var comment = getForm("updatePlaylist_comment");
+			var publicPlaylist = getForm("updatePlaylist_publicPlaylist");
+			var songIdToAdd = getForm("updatePlaylist_songIdToAdd");
+			var songIndexToRemoved = getForm("updatePlaylist_songIndexToRemove");
+			updatePlaylist(auth, playlistId, name, comment, publicPlaylist, songIdToAdd, songIndexToRemoved, function() {
+				log(this);
+			});
+		}
+
+		function _deletePlaylist() {
+			var id = getForm("deletePlaylist_id");
+			deletePlaylist(auth, id, function() {
+				log(this);
+			});
+		}
+
+		/*
+		 *	Podcast.js Implementation
+		 */
+
+		function _getPodcasts() {
+			var includeEpisodes = getForm("getPodcasts_includeEpisodes");
+			var id = getForm("getPodcasts_id");
+			getPodcasts(auth, includeEpisodes, id, function() {
+				log(this);
+			});
+		}
+
+		function _getNewestPodcasts() {
+			var count = getForm("getNewestPodcasts_count");
+			getNewestPodcasts(auth, count, function() {
+				log(this);
+			});
+		}
+
+		function _refreshPodcasts() {
+			refreshPodcasts(auth, function() {
+				log(this);
+			});
+		}
+
+		function _createPodcastChannel() {
+			var url = getForm("createPodcastChannel_url");
+			createPodcastChannel(auth, url, function() {
+				log(this);
+			});
+		}
+
+		function _deletePodcastChannel() {
+			var id = getForm("deletePodcastChannel_id");
+			deletePodcastChannel(auth, id, function() {
+				log(this);
+			});
+		}
+
+		function _deletePodcastEpisode() {
+			var id = getForm("deletePodcastEpisode_id");
+			deletePodcastEpisode(auth, id, function() {
+				log(this);
+			});
+		}
+
+		function _downloadPodcastEpisode() {
+			var id = getForm("downloadPodcastEpisode_id");
+			downloadPodcastEpisode(auth, id, function() {
+				log(this);
+			});
+		}
+
+		/*
+		 *	Searching.js Implementation
+		 */
+
+		function _search() {
+			var artist = getForm("search_artist");
+			var album = getForm("search_album");
+			var title = getForm("search_title");
+			var any = getForm("search_any");
+			var count = getForm("search_count");
+			var offset = getForm("search_offset");
+			var newerThan = getForm("search_newerThan");
+			search(auth, album, artist, title, any, count, offset, newerThan, function() {
+				log(this);
+			});
+		}
+
+		function _search2() {
+			var query = getForm("search2_query");
+			var artistCount = getForm("search2_artistCount");
+			var artistOffset = getForm("search2_artistOffset");
+			var albumCount = getForm("search2_albumCount");
+			var albumOffset = getForm("search2_albumOffset");
+			var songCount = getForm("search2_songCount");
+			var songOffset = getForm("search2_songOffset");
+			var musicFolderId = getForm("search2_musicFolderId");
+			search2(auth, query, artistCount, artistOffset, albumCount, albumOffset, songCount, songOffset, musicFolderId, function() {
+				log(this);
+			});
+		}
+
+		function _search3() {
+			var query = getForm("search3_query");
+			var artistCount = getForm("search3_artistCount");
+			var artistOffset = getForm("search3_artistOffset");
+			var albumCount = getForm("search3_albumCount");
+			var albumOffset = getForm("search3_albumOffset");
+			var songCount = getForm("search3_songCount");
+			var songOffset = getForm("search3_songOffset");
+			var musicFolderId = getForm("search3_musicFolderId");
+			search3(auth, query, artistCount, artistOffset, albumCount, albumOffset, songCount, songOffset, musicFolderId, function() {
+				log(this);
+			});
+		}
+
+		/*
+		 *	Sharing.js Implementation
+		 */
+
+		function _getShares() {
+			getShares(auth, function() {
+				log(this);
+			});
+		}
+
+		function _createShare() {
+			var id = getForm("createShare_id");
+			var description = getForm("createShare_description");
+			var expires = getForm("createShare_expires");
+			createShare(auth, id, description, expires, function() {
+				log(this);
+			});
+		}
+
+		function _updateShare() {
+			var id = getForm("updateShare_id");
+			var description = getForm("updateShare_description");
+			var expires = getForm("updateShare_expires");
+			updateShare(auth, id, description, expires, function() {
+				log(this);
+			});
+		}
+
+		function _deleteShare() {
+			var id = getForm("deleteShare_id");
+			deleteShare(auth, id, function() {
+				log(this);
+			});
+		}
+
+		/*
+		 *	System.js Implementation
+		 */
+
+		function _ping() {
+			ping(auth, function() {
+				log(this);
+			});
+		}
+
+		function _getLicense() {
+			getLicense(auth, function() {
+				log(this);
+			});
+		}
+
+		/*
+		 *	UserManagement.js Implementation
+		 */
+
+		function _getUser() {
+			var username = getForm("getUser_username");
+			getUser(auth, username, function() {
+				log(this);
+			});
+		}
+
+		function _getUsers() {
+			getUsers(auth, function() {
+				log(this);
+			});
+		}
+
+		function _createUser() {
+			var username = getForm("createUser_username");
+			var password = getForm("createUser_password");
+			var email = getForm("createUser_email");
+			var ldapAuthenticated = getForm("createUser_ldapAuthenticated");
+			var adminRole = getForm("createUser_adminRole");
+			var settingsRole = getForm("createUser_settingsRole");
+			var streamRole = getForm("createUser_streamRole");
+			var jukeboxRole = getForm("createUser_jukeboxRole");
+			var downloadRole = getForm("createUser_downloadRole");
+			var uploadRole = getForm("createUser_uploadRole");
+			var playlistRole = getForm("createUser_playlistRole");
+			var coverArtRole = getForm("createUser_coverArtRole");
+			var commentRole = getForm("createUser_commentRole");
+			var podcastRole = getForm("createUser_podcastRole");
+			var shareRole = getForm("createUser_shareRole");
+			var videoConversionRole = getForm("createUser_videoConversionRole");
+			var musicFolderId = getForm("createUser_musicFolderId");
+			createUser(auth, username, password, email, ldapAuthenticated, adminRole, settingsRole, streamRole, jukeboxRole, downloadRole, uploadRole, playlistRole, coverArtRole, commentRole, podcastRole, shareRole, videoConversionRole, musicFolderId, function() {
+				log(this);
+			});
+		}
+
+		function _updateUser() {
+			var username = getForm("updateUser_username");
+			var password = getForm("updateUser_password");
+			var email = getForm("updateUser_email");
+			var ldapAuthenticated = getForm("updateUser_ldapAuthenticated");
+			var adminRole = getForm("updateUser_adminRole");
+			var settingsRole = getForm("updateUser_settingsRole");
+			var streamRole = getForm("updateUser_streamRole");
+			var jukeboxRole = getForm("updateUser_jukeboxRole");
+			var downloadRole = getForm("updateUser_downloadRole");
+			var uploadRole = getForm("updateUser_uploadRole");
+			var playlistRole = getForm("updateUser_playlistRole");
+			var coverArtRole = getForm("updateUser_coverArtRole");
+			var commentRole = getForm("updateUser_commentRole");
+			var podcastRole = getForm("updateUser_podcastRole");
+			var shareRole = getForm("updateUser_shareRole");
+			var videoConversionRole = getForm("updateUser_videoConversionRole");
+			var musicFolderId = getForm("updateUser_musicFolderId");
+			var maxBitRate = getForm("updateUser_maxBitRate");
+			updateUser(auth, username, password, email, ldapAuthenticated, adminRole, settingsRole, streamRole, jukeboxRole, downloadRole, uploadRole, playlistRole, coverArtRole, commentRole, podcastRole, shareRole, videoConversionRole, musicFolderId, maxBitRate, function() {
+				log(this);
+			});
+		}
+
+		function _deleteUser() {
+			var username = getForm("deleteUser_username");
+			deleteUser(auth, username, function() {
+				log(this);
+			});
+		}
+
+		function _changePassword() {
+			var username = getForm("changePassword_username");
+			var password = getForm("changePassword_password");
+			changePassword(auth, username, password, function() {
+				log(this);
+			});
+		}
+
+	</script>
 </body>
 <footer>
-    <div class="footer">
-        <h4>Christopher Young |
-            <a href="#" class="fa fa-facebook-square"></a>
-            <a href="#" class="fa fa-linkedin-square"></a>
-            <a href="#" class="fa fa-envelope"></a>
-            <a href="#" class="fa fa-google-plus-square"></a>
-            <a href="#" class="fa fa-github-square"></a>
-        </h4>
+	<div class="footer">
+		<h4>Christopher Young |
+			<a href="#" class="fa fa-facebook-square"></a>
+			<a href="#" class="fa fa-linkedin-square"></a>
+			<a href="#" class="fa fa-envelope"></a>
+			<a href="#" class="fa fa-google-plus-square"></a>
+			<a href="#" class="fa fa-github-square"></a>
+		</h4>
 
-    </div>
+	</div>
 
 </footer>
 
