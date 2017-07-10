@@ -101,8 +101,42 @@ function getResponseNode(auth, callback, functionName, functionParameters) {
 	};
 }
 
+/**
+ * Used to grab the binary data.
+ * @param {object}   auth               Authenticate Object.
+ * @param {function} callback           The callback function that will be used in the async state.
+ * @param {string}   functionName       the name of the subsonic function.
+ * @param {string}   functionParameters The parameters for the subsonic function.
+ */
 function getDownload(auth, callback, functionName, functionParameters) {
 	var call = auth.generateApiCall(functionName, functionParameters),
+		xhr = new XMLHttpRequest();
+	xhr.open("GET", call, true);
+	xhr.send();
+	xhr.onreadystatechange = function () {
+		if (xhr.readyState === 4 && xhr.status === 200) {
+			callback.apply(call);
+		}
+	};
+}
+
+
+/**
+ * Used to grab the m3u8 from the server.
+ * @param   {object}   auth               Authenticate Object
+ * @param   {function} callback           The callback function that will be used in the async state.
+ * @param   {[[Type]]} functionName       The name of the subsonic function.
+ * @param   {string}   functionParameters The parameters for the subsonic function.
+ */
+function getM3U8(auth, callback, functionName, functionParameters) {
+	var call = function () {
+			var salt = this.generateSalt();
+			var token = this.generateToken(salt);
+			var serverAddress = this.address + "/rest/" + functionName + ".m3u8?";
+			var authParams = "u=" + this.user + "&t=" + token + "&s=" + salt + "&v=" + this.version + "&c=" + this.client;
+			console.log(serverAddress + functionParameters + authParams);
+			return serverAddress + functionParameters + authParams;
+		},
 		xhr = new XMLHttpRequest();
 	xhr.open("GET", call, true);
 	xhr.send();
